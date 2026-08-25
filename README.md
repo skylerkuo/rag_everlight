@@ -124,11 +124,7 @@ The Gemma GGUF is local and must be downloaded/provided separately. Qwen and BGE
 
 ## 5. Environment setup
 
-refer to previous projects llama.cpp python and 
-
-```python
-pip install "transformers @ git+https://github.com/huggingface/transformers.git@main"
-```
+refer to previous projects llama.cpp python and requirements.txt
 
 ## 6. Configure paths before running
 

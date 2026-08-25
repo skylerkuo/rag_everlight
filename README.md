@@ -124,40 +124,11 @@ The Gemma GGUF is local and must be downloaded/provided separately. Qwen and BGE
 
 ## 5. Environment setup
 
-The project is written for Ubuntu/Linux-style paths.
+refer to previous projects llama.cpp python and 
 
-### 5.1 Clone and create a virtual environment
-
-```bash
-git clone https://github.com/skylerkuo/rag_everlight.git
-cd rag_everlight
-
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
+```python
+pip install "transformers @ git+https://github.com/huggingface/transformers.git@main"
 ```
-
-### 5.2 Install PyTorch
-
-`rag_app/models/qwen35_vl.py` imports PyTorch directly. Install the PyTorch build appropriate for your CPU/CUDA environment before running Qwen.
-
-After PyTorch is available, install the repository requirements:
-
-```bash
-pip install -r requirements.txt
-```
-
-The Gemma wrapper uses `ChatLlamaCpp`. If `llama_cpp` is not already available in the environment, install a `llama-cpp-python` build suitable for your system.
-
-For tests, install pytest if needed:
-
-```bash
-pip install pytest
-```
-
-A GPU is strongly recommended for Qwen3.5-4B and for practical preprocessing/indexing speed. The Qwen wrapper uses `device_map="auto"` and `torch_dtype="auto"`.
-
----
 
 ## 6. Configure paths before running
 

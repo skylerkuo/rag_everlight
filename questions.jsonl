@@ -1,0 +1,200 @@
+{"category": "客戶可能問的問題", "question": "我有兩塊彼此不共地的控制板，需要交換數位訊號，光耦適合放在中間嗎？", "answer": "適合。光耦利用光來傳遞訊號，因此輸入端與輸出端可以維持電氣隔離，不需要共地。這種方式特別適合兩側存在地電位差或高電壓差的情況，也能降低干擾互相耦合的風險。"}
+{"category": "客戶可能問的問題", "question": "如果我的重點是隔離控制訊號，而不是放大功率，光耦能解決什麼問題？", "answer": "光耦的核心價值是隔離式訊號傳輸，而不是直接提供大功率輸出。它可把控制訊號跨越不同電位傳送，同時降低兩側電路直接電氣連接造成的干擾、可靠度與安全性問題。"}
+{"category": "客戶可能問的問題", "question": "一般 Photo Transistor 光耦比較適合哪些常見工業場合？", "answer": "Photo Transistor 系列可用在電源、電錶、通訊設備、UPS、太陽能與一般工業控制板。若是 PLC、監控檢測、不同電位電路之間的訊號傳輸，也有多個 Photo Transistor 系列可選。"}
+{"category": "客戶可能問的問題", "question": "我的產品要做 AC 線路存在偵測，應優先看哪種輸入型態的光耦？", "answer": "可優先看 AC 輸入型 Photo Transistor 光耦。這類產品的輸入端通常使用反向並聯的紅外 LED，可處理交流方向變化；例如 EL814、EL354N-G、H11AAX 等系列的應用都包含 AC 線路監控。"}
+{"category": "客戶可能問的問題", "question": "未知極性的直流訊號要做隔離感測，有沒有適合的光耦方向？", "answer": "可以考慮 AC 輸入型 Photo Transistor 光耦，因其輸入端採反向並聯 LED，可接受兩種極性。EL814 與 EL354N-G 的產品應用都明確列出未知極性直流感測。"}
+{"category": "客戶可能問的問題", "question": "如果空間很小但又要 AC 輸入隔離，有哪些小型封裝方向？", "answer": "可查看 SOP 或 SSOP 的 AC 輸入 Photo Transistor，例如 EL354N-G 的 4-pin small outline 封裝與 EL3H4-G 的 4-pin SSOP-AC。這些產品同時保留 AC 輸入能力，隔離電壓為 3750 Vrms。"}
+{"category": "客戶可能問的問題", "question": "我需要四路隔離但不想用四顆單通道光耦，有整合型選擇嗎？", "answer": "可以。EL847 在一個 16-pin DIP 封裝中提供四個隔離通道，並有 SMD 選項；若希望小型 SMD，多通道 ELQ3H7 也在 16-pin small outline SMD 中提供四通道。"}
+{"category": "客戶可能問的問題", "question": "要做高密度四通道 SMD 隔離，可以看哪個系列？", "answer": "可查看 ELQ3H7。它提供四個通道並採 16-pin small outline SMD 封裝，CTR 最低 50%（IF=5 mA、VCE=5 V），輸入輸出隔離電壓為 3750 Vrms。"}
+{"category": "客戶可能問的問題", "question": "如果我要的是 8 mm 爬電距離又希望封裝薄，有對應系列嗎？", "answer": "可考慮 EL101X-G 或 EL111X-G 的 Long Creepage 系列。資料標示這類封裝具有 8 mm 長沿面距離與約 2.2 mm 厚度，並提供 5000 Vrms 的輸入輸出隔離。"}
+{"category": "客戶可能問的問題", "question": "CNY64/65 為什麼適合對安全隔離要求較高的產品？", "answer": "CNY64/65 是高隔離 Photo Transistor 系列，輸入與輸出之間的絕緣穿透厚度至少約 3 mm，產品頁也列出加強絕緣與安全等級 II 防電擊用途。其隔離電壓最高標示至約 8000 Vrms，並具有 BVCEO 最低 80 V 的特性。"}
+{"category": "客戶可能問的問題", "question": "若我需要 5000 Vrms 隔離又是標準 DIP，可有哪些 Photo Transistor 選擇？", "answer": "可依通道與輸入形式選擇多個系列，例如 EL81X 為 4-pin DIP-DC、EL814 為 4-pin DIP-AC、EL827 為 8-pin 雙通道、EL847 為 16-pin 四通道。這些產品頁都標示輸入與輸出隔離電壓為 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "EL827 適合需要兩路 Photo Transistor 隔離的設計嗎？", "answer": "適合。EL827 是雙通道 Photo Transistor 光耦，採 8-pin DIP，並提供 wide-lead spacing 與 SMD 選項。其 CTR 為 50%～600%（IF=5 mA、VCE=5 V），隔離電壓為 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "如果我要四路 Photo Transistor 並希望保持標準 DIP，EL847 有什麼規格重點？", "answer": "EL847 提供四個隔離通道，封裝為 16-pin DIP，並可選 SMD。其 CTR 為 50%～600%（IF=5 mA、VCE=5 V），輸入與輸出隔離電壓為 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "EL357N-G 這類 4-pin SOP 光耦適合哪些小型設備？", "answer": "EL357N-G 採 4-pin small outline SMD 封裝，適合空間受限的表面黏著設計。它可用於 PLC、系統設備與量測儀器、家電、監控檢測，以及不同電位與阻抗電路之間的訊號傳輸。"}
+{"category": "客戶可能問的問題", "question": "EL354N-G 和 EL357N-G 最大的使用方向差異是什麼？", "answer": "EL354N-G 是 AC 輸入 Photo Transistor，輸入端有反向並聯 LED，適合 AC 線路監控或未知極性直流感測；EL357N-G 則是 DC 輸入的小型 SMD Photo Transistor。兩者都是 4-pin small outline 類型且隔離電壓為 3750 Vrms，但輸入特性不同。"}
+{"category": "客戶可能問的問題", "question": "如果我要更高 CTR、輸入電流又不想太大，Photo Darlington 有什麼選擇？", "answer": "可考慮 Photo Darlington。EL815 的 CTR 最低 600%（IF=1 mA、VCE=2 V），EL825 的 CTR 為 600%～7500%，EL452-G 的 CTR 最低 1000%；這類產品適合需要較高電流傳輸比的隔離場合。"}
+{"category": "客戶可能問的問題", "question": "EL825 適合電話或交換機類設備嗎？", "answer": "適合。EL825 是雙通道 Photo Darlington，產品應用明確包含電話機與電話交換機，也可用於序控制器、系統設備與量測儀器，以及不同電位電路間的訊號傳輸。"}
+{"category": "客戶可能問的問題", "question": "EL452-G 為什麼適合高壓輸出側的 Darlington 應用？", "answer": "EL452-G 是高電壓 Photo Darlington，產品頁標示 VCEO 大於 350 V，CTR 最低 1000%（IF=1 mA、VCE=2 V）。它還採 4-pin small outline SMD 封裝，隔離電壓為 3750 Vrms。"}
+{"category": "客戶可能問的問題", "question": "若只是要一般低功耗邏輯或電信耦合，6-pin Photo Darlington 可看哪些方向？", "answer": "6-pin DIP Photo Darlington 類型包含 TIL113、4NXX 與 H11BX 系列。其資料列出 CTR 最低 50%（IF=10 mA、VCE=5 V）、隔離電壓 5000 Vrms，應用包括低功耗邏輯、電信設備與攜帶式電子產品。"}
+{"category": "客戶可能問的問題", "question": "要把微控制器訊號送進高速介面，什麼時候應從一般光耦改看高速光耦？", "answer": "當資料傳輸速度與傳播延遲開始成為主要限制時，就應考慮 High Speed Coupler。高速光耦以較快的光偵測架構處理資料，應用手冊列出 RS232、CAN、SPI、I2C、RS485/422、PLC 高速計數與伺服控制等場景。"}
+{"category": "客戶可能問的問題", "question": "ELM452/ELM453 適合小型高速隔離嗎？", "answer": "適合。ELM452/ELM453 採 5-pin small outline 封裝，產品頁列出 1 Mbit/s 與 10 Mbit/s 高速傳輸、3750 Vrms 隔離，以及 -40°C～85°C 的保證性能範圍，並標示 CMR 15 kV/µs（VCM=1500 V）。"}
+{"category": "客戶可能問的問題", "question": "如果要比一般 phototransistor 光耦更快，ELM452/453 的結構有什麼不同？", "answer": "ELM452/453 使用高速 photodetector transistor，並把 photodiode bias 與輸出 transistor collector 分開連接。資料說明這種方式可降低基極—集極電容，速度可比傳統 phototransistor coupler 提高數個數量級。"}
+{"category": "客戶可能問的問題", "question": "6N13X 適合既要 DIP 又要高速資料傳輸的產品嗎？", "answer": "適合。6N13X 採 8-pin DIP，並提供 wide lead spacing 與 SMD 選項；資料列出 1 Mbit/s、10 Mbit/s 的高速傳輸能力、5000 Vrms 隔離，以及 0°C～70°C 的保證性能範圍。"}
+{"category": "客戶可能問的問題", "question": "要做 RS-232 線路接收器，億光高速光耦有哪些方向可看？", "answer": "可查看 6N13X 或 ELS511/ELS611 等高速光耦系列。這些產品的應用列表都包含 RS-232 線路接收器，並同時提供電氣隔離與高速訊號傳輸能力。"}
+{"category": "客戶可能問的問題", "question": "ELS511/ELS611 封裝縮小對產品設計有什麼好處？", "answer": "ELS511/ELS611 採 6-pin small DIP，資料標示封裝體積比 8-pin 小約 50%。對空間受限的工業控制板來說，可在維持 5000 Vrms 隔離與高速傳輸能力的同時減少佔板面積。"}
+{"category": "客戶可能問的問題", "question": "如果我需要 15 Mbit/s 等級的高速光耦，哪種封裝頁面有列到這個速度？", "answer": "8-pin SOP 高速光耦產品頁列出 1 Mbit/s、10 Mbit/s 與 15 Mbit/s 的速度等級。該系列同時提供單/雙通道選擇、3750 Vrms 隔離與小型 SO-8 類封裝。"}
+{"category": "客戶可能問的問題", "question": "若產品要跨較大爬電距離且需要高速隔離，ELW13X 有什麼優勢？", "answer": "ELW13X 屬 Wide Body 高速光耦，產品資料列出外部爬電距離大於 10 mm，並支援 1、5、10 Mbit/s 等高速等級。這種組合適合安全距離要求較高、同時又需要高速資料傳輸的設計。"}
+{"category": "客戶可能問的問題", "question": "如果我要的是施密特觸發輸出而不是一般光電晶體，H11LX 可以帶來什麼好處？", "answer": "H11LX 的輸出檢測器內建 Schmitt trigger，具有遲滯，可提升雜訊免疫並進行脈衝整形。它的典型 NRZ 資料速率為 1 MHz，最大邏輯相容輸出電流 16 mA，隔離電壓 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "H11LX 適合把有雜訊的線路訊號整理成較乾淨的數位訊號嗎？", "answer": "適合。H11LX 的 Schmitt trigger 具有 hysteresis，產品頁明確說明可提供 noise immunity 與 pulse shaping；應用也包括線路接收器、AC-to-TTL 轉換與方波整形。"}
+{"category": "客戶可能問的問題", "question": "如果我要做 AC 到 TTL 的隔離與整形，H11LX 是可行方向嗎？", "answer": "可行。H11LX 的應用列表直接包含 AC 到 TTL 轉換與方波整形，並利用內建 Schmitt trigger 提供遲滯與雜訊抑制。其輸入輸出隔離電壓為 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "我想用無機械接點的開關取代傳統繼電器，SSR 有哪些實際優點？", "answer": "光繼電器 SSR 以 IR LED 控制輸出端 MOSFET，因此沒有機械接點磨損，也沒有開關聲音。資料還指出它體積小、壽命長、切換比機械式繼電器快，並能協助處理輸入與輸出之間的干擾與絕緣問題。"}
+{"category": "客戶可能問的問題", "question": "EL4XXA 適合做常開型單通道無接點開關嗎？", "answer": "適合。EL4XXA 是單通道、等效 1 Form A 的常開型 SSR，輸出側由 photovoltaic diode array 與 MOSFET 組成。產品頁列出負載電壓 60～600 V、隔離電壓 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "如果我要小型 SMD 的 Form-A SSR，ELM4XXA 有哪些重點？", "answer": "ELM4XXA 採 4-pin small outline SMD 封裝，單通道配置等效 1 Form A EMR，屬常開型光電開關。其負載電壓範圍為 60～600 V，輸入輸出隔離電壓為 3750 Vrms。"}
+{"category": "客戶可能問的問題", "question": "EL8XXA 適合需要兩路 SSR 的設計嗎？", "answer": "適合。EL8XXA 產品頁列出雙通道配置，採 8-pin DIP 並可選 SMD，常開型輸出可支援 400 V、600 V、1200 V 等負載電壓，隔離電壓為 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "EL6XXA 與 EL4XXA 都是 SSR，封裝與輸出連接上有什麼差別？", "answer": "EL4XXA 是 4-pin DIP 單通道 Form-A SSR；EL6XXA 採 6-pin DIP，資料說明可支援 AC/DC 與 DC-only 的輸出連接方式。兩者都標示 60～600 V 負載電壓與 5000 Vrms 隔離。"}
+{"category": "客戶可能問的問題", "question": "SSR 可以用在工業控制與量測設備嗎？", "answer": "可以。EL4XXA、ELM4XXA、EL6XXA、EL8XXA 等產品頁都列出工業控制、量測設備、交換機、事務機或保全設備等用途。實際選型主要再看封裝、通道數、負載電壓與隔離要求。"}
+{"category": "客戶可能問的問題", "question": "如果負載電壓可能到 1200 V，普通 EL4XXA 還適合嗎？", "answer": "EL4XXA 產品頁的負載電壓範圍是 60～600 V，因此若需求到 1200 V，應看有列出 1200 V 等級的系列，例如 EL8XXA。選型時要依具體料號的負載電壓規格確認。"}
+{"category": "客戶可能問的問題", "question": "我需要 600 V 的無接點開關，但封裝希望小型 SMD，可以從哪個系列開始找？", "answer": "可先查看 ELM4XXA。它是 4-pin small outline SMD SSR，負載電壓系列涵蓋 60～600 V，隔離電壓為 3750 Vrms，適合需要小型封裝的常開型無接點切換設計。"}
+{"category": "客戶可能問的問題", "question": "Photo Triac Driver 是直接承受大負載電流，還是用來驅動外部功率元件？", "answer": "一般 Photo Triac Driver 主要作為電子控制端與外部 Power TRIAC 之間的隔離介面。EL30XX 類產品可用低功率光觸發訊號去控制外部 Power TRIAC，進而切換 115～240 VAC 的電阻性或電感性負載。"}
+{"category": "客戶可能問的問題", "question": "如果是交流馬達或螺線管控制，EL30XX 類 Triac Driver 可以考慮嗎？", "answer": "可以。EL30XX 產品頁明確列出交流馬達驅動、螺線管閥門控制、靜態電源開關與 E.M. 接觸器等應用。它的用途是隔離邏輯控制端，再驅動外部 Power TRIAC 來控制 AC 負載。"}
+{"category": "客戶可能問的問題", "question": "要做調光，為什麼會比起 Zero Cross 更常考慮 Random Phase？", "answer": "Random Phase 可以在交流正弦波的任意相位觸發，因此能透過改變觸發角來改變每個週期的導通角與輸出功率。這正是白熾燈調光等功率調整應用需要的控制方式。"}
+{"category": "客戶可能問的問題", "question": "如果只是要低干擾地開關 AC 負載，Zero Cross 有什麼優點？", "answer": "Zero Cross 會在交流波形接近零點時進行動作，因此可降低切換瞬間的突波、火花與 EMI/RFI。它特別適合交流電源開關、Relay 驅動等以通斷控制為主的場合。"}
+{"category": "客戶可能問的問題", "question": "EL30XX(P5) 的 5-pin 設計跟一般 6-pin 版本有什麼特別之處？", "answer": "EL30XX(P5) 把輸出端 Pin 5 切除，產品頁說明此設計可抑制天線效應。它仍保留 250～800 V 峰值擊穿電壓、5000 Vrms 隔離，以及 Zero Cross 或 Random Phase 類型。"}
+{"category": "客戶可能問的問題", "question": "如果我的板子空間有限，又要使用 Photo Triac Driver，有小型 SOP 選擇嗎？", "answer": "可查看 ELM30XX。它採 4-pin SOP 小型封裝，支援過零與隨機相位類型，峰值擊穿電壓 250～800 V，輸入輸出隔離電壓為 3750 Vrms。"}
+{"category": "客戶可能問的問題", "question": "ELM30XX 可不可以放在溫度控制器的 AC 負載開關端？", "answer": "可以。ELM30XX 的產品應用明確列出溫度控制，也列出光源控制、靜態電源開關、交流馬達驅動與固態繼電器。它通常負責將低壓控制邏輯隔離後送到 Photo Triac Driver，再控制外部 AC 功率元件。"}
+{"category": "客戶可能問的問題", "question": "Photo Power Triac 和一般 Photo Triac Driver 的定位有什麼差別？", "answer": "Photo Power Triac 把較高電流能力的 Power TRIAC 整合在輸出側，可用幾 mA 到幾十 mA 的輸入小訊號直接控制較高電流的 AC 負載。一般 Photo Triac Driver 則主要用來觸發外部 Power TRIAC。"}
+{"category": "客戶可能問的問題", "question": "ELRX213 與 ELRX223 在觸發時機上有什麼差異？", "answer": "ELRX213 是 Zero Cross 系列，輸入 ON 後仍要等輸出電壓接近 0° 或 180° 才導通；ELRX223 是 Random Phase 系列，輸入訊號 ON 時輸出端會立即導通。兩者在輸入 OFF 後都會受 TRIAC 閉鎖特性影響，在負載電流接近零時截止。"}
+{"category": "客戶可能問的問題", "question": "我要做相位控制型 AC 功率調整，ELRX213 和 ELRX223 哪個方向更合適？", "answer": "如果需要在正弦波任意相位觸發，應優先考慮 Random Phase 的 ELRX223。ELRX213 是 Zero Cross，只有在零交越附近才允許觸發，較適合通斷型控制而非任意觸發角控制。"}
+{"category": "客戶可能問的問題", "question": "Photo Power Triac 在高溫環境下要注意什麼？", "answer": "ELRX213/ELRX223 的資料指出，當操作溫度超過 40°C 後，Power TRIAC 的最大允許導通電流會逐漸下降。因此高溫設計不能只看室溫電流能力，還要考慮溫度降額。"}
+{"category": "客戶可能問的問題", "question": "如果 Photo Power Triac 的輸入端容易受到雜訊干擾，有什麼基本改善方向？", "answer": "手冊建議抑制輸入端雜訊，因為 Power TRIAC 動作所需能量很小，雜訊可能造成誤動作或損壞。可在輸入側使用 R、C 濾波電路吸收雜訊。"}
+{"category": "客戶可能問的問題", "question": "AC 負載端有瞬間高壓尖峰時，Photo Power Triac 電路可以怎麼保護？", "answer": "手冊建議在輸出負載端使用緩衝電路或壓敏電阻來限制開關瞬間產生的峰值電壓。同時應盡量縮短電路走線，避免走線電感額外產生尖峰。"}
+{"category": "客戶可能問的問題", "question": "要直接隔離驅動 IGBT 或 Power MOSFET，EL31X0 是什麼類型的產品？", "answer": "EL31X0 是 IGBT Gate Driver 光耦，內含高速高增益光偵測器與功率輸出級，可直接驅動 IGBT 或 Power MOSFET gate。產品頁列出最大輸出電流 2.5 A、5000 Vrms 隔離與 -40°C～110°C 的保證性能範圍。"}
+{"category": "客戶可能問的問題", "question": "如果要小於 8-pin DIP 的 IGBT Gate Driver 封裝，可以看什麼系列？", "answer": "可查看 ELS31X0 的 6-pin SDIP。產品資料標示其封裝體積比 8-pin 小約 50%，同時仍具最大 2.5 A 輸出、±25 kV/µs CMTI、5000 Vrms 隔離與 -40°C～110°C 保證性能。"}
+{"category": "客戶可能問的問題", "question": "ELW3120 適合需要大爬電距離的 IGBT 驅動板嗎？", "answer": "適合。ELW3120 採 8-pin DIP Wide Body，外部爬電距離大於 10 mm，並提供 5000 Vrms 隔離。它可直接驅動 IGBT/Power MOSFET，最大輸出電流 2.5 A。"}
+{"category": "客戶可能問的問題", "question": "ELW3120 和標準 EL31X0 都能直接驅動 IGBT，選型時可怎麼區分？", "answer": "兩者都提供最大 2.5 A 輸出與 5000 Vrms 隔離，並適合 IGBT/Power MOSFET。ELW3120 的主要特色是 Wide Body 與大於 10 mm 的外部爬電距離；標準 EL31X0 則採一般 8-pin DIP。"}
+{"category": "客戶可能問的問題", "question": "如果產品要求 LSOP 封裝的 IGBT Gate Driver，億光有相對應系列嗎？", "answer": "有，EL57xx 系列使用 6-pin LSOP，內含高速高增益光偵測器與內部屏蔽，資料標示 CMTI 為 ±25 kV/µs。其用途包含隔離驅動 IGBT/Power MOSFET、UPS、變頻器與家電。"}
+{"category": "客戶可能問的問題", "question": "IGBT Gate Driver 為什麼特別適合 UPS 或變頻器？", "answer": "這些應用通常需要高速切換功率元件，同時要求控制側與高壓功率側隔離。EL31X0、ELS31X0、ELW3120、EL57xx 等產品頁都將 UPS、變頻器與 IGBT/Power MOSFET 隔離驅動列為主要應用。"}
+{"category": "客戶可能問的問題", "question": "如果設備工作溫度可能到 100°C，EL31X0 系列是否還在保證範圍內？", "answer": "是。EL31X0 產品頁標示保證性能範圍為 -40°C 至 110°C，因此 100°C 仍在該標示範圍內。實際設計仍要同時確認功耗、散熱與特定料號的完整規格。"}
+{"category": "客戶可能問的問題", "question": "EL31X0 的 CMTI 對高 dv/dt 功率系統有什麼幫助？", "answer": "EL31X0 的光偵測器具有內部屏蔽，資料標示保證 common-mode transient immunity 為 ±25 kV/µs。這有助於在 IGBT/Power MOSFET 高速切換造成大共模瞬變時，降低驅動訊號被干擾的風險。"}
+{"category": "客戶可能問的問題", "question": "如果我想用一顆光耦在電話線接口做 AC 感測，EL814 和 H11AAX 都值得看嗎？", "answer": "兩者都屬 AC 輸入 Photo Transistor，應用都包含電話線接口。EL814 是 4-pin DIP，CTR 最低 20%（IF=±1 mA、VCE=5 V）；H11AAX 是 6-pin DIP，CTR 最低 10%（IF=±10 mA、VCE=5 V），兩者隔離電壓均為 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "H11AAX 的 AC 輸入結構為什麼能接受交流訊號？", "answer": "H11AAX 輸入端由兩個紅外 LED 反向並聯，因此正、負半週都可由其中一顆 LED 導通並產生光訊號。輸出端再由 phototransistor 接收，達成 AC 輸入與電氣隔離。"}
+{"category": "客戶可能問的問題", "question": "EL3H4-G 適合比 DIP 更緊湊的 AC 光耦設計嗎？", "answer": "適合。EL3H4-G 採 4-pin small outline SMD/SSOP-AC 封裝，具有 AC 輸入、CTR 最低 20%（IF=±1 mA、VCE=5 V）與 3750 Vrms 隔離，並列出 AC 線路監控等應用。"}
+{"category": "客戶可能問的問題", "question": "若我要四通道 AC 輸入且偏好小型高密度封裝，有什麼方向？", "answer": "可查看 ELQ3H4 的 16-pin SSOP-AC 類型。資料描述其為高密度應用的多通道小型封裝，支援 AC 輸入、CTR 最低 20%（IF=±1 mA、VCE=5 V），隔離電壓為 3750 Vrms。"}
+{"category": "客戶可能問的問題", "question": "ELQ3H4 的封裝有沒有對環境光做額外處理？", "answer": "有。產品描述指出 ELQ3H4 的塑膠 SOP 封裝具有 shield effect，可用來阻隔環境光。這對高密度多通道光耦設計有助於降低外部光線對內部光偵測器的影響。"}
+{"category": "客戶可能問的問題", "question": "如果我要用 8-pin SOP 做單/雙通道 Photo Transistor，有對應系列嗎？", "answer": "有。EL20X/EL21X 與 ELD20X/ELD21X 使用 8-pin small outline、SO-8 footprint，提供單/雙通道配置。產品頁列出 CTR 40%～320%（IF=10 mA、VCE=5 V）與 3750 Vrms 隔離。"}
+{"category": "客戶可能問的問題", "question": "8-pin SOP Photo Transistor 適合回授控制電路嗎？", "answer": "適合。該系列的產品應用包含回授控制電路、通用開關、監控與檢測，以及不同電位與阻抗的耦合系統。若還有速度或精度要求，應再依特定型號的 CTR 與動態規格確認。"}
+{"category": "客戶可能問的問題", "question": "CNY17/4NXX 這類 6-pin Photo Transistor 適合哪些控制應用？", "answer": "產品頁列出電源穩壓器、數位邏輯輸入、微處理器輸入、電器系統與工業控制。其 CTR 為 40%～320%（IF=10 mA、VCE=5 V），隔離電壓為 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "如果我要 RoHS 相容的光耦，這批億光產品普遍有支援嗎？", "answer": "有。這批產品頁中多數 Photo Transistor、High Speed、SSR、Triac Driver、Photo Darlington 與 IGBT Gate Driver 都標示符合 RoHS。實際採購時仍應以特定料號最新 datasheet 與認證文件為準。"}
+{"category": "客戶可能問的問題", "question": "無鹵素要求下，4-pin SOP Photo Transistor 有哪些例子？", "answer": "EL357N-G、EL354N-G、EL3H7-G、EL3H4-G 等小型 SOP/SSOP 系列的產品頁均標示無鹵素與無鉛化製程。選型時再依 AC/DC 輸入、CTR、隔離電壓與封裝尺寸挑選。"}
+{"category": "客戶可能問的問題", "question": "如果客戶說要『高速、5000 Vrms、較小 DIP』，ELS511/611 是否符合方向？", "answer": "符合。ELS511/611 是 6-pin small DIP 高速光耦，支援 1 Mbit/s、10 Mbit/s，隔離電壓 5000 Vrms，且封裝體積比 8-pin 小約 50%。"}
+{"category": "客戶可能問的問題", "question": "如果客戶說要『高速、3750 Vrms、小型 SOP』，ELM452/453 是否符合方向？", "answer": "符合。ELM452/453 使用 5-pin small outline 封裝，隔離電壓 3750 Vrms，並列出 1 Mbit/s、10 Mbit/s 的高速能力與 -40°C～85°C 保證性能。"}
+{"category": "客戶可能問的問題", "question": "如果客戶要『高速、5000 Vrms、Wide Body』，應優先看哪類？", "answer": "可優先查看 Wide Body 高速光耦，例如 ELW13X 類產品。資料列出大於 10 mm 的外部爬電距離、5000 Vrms 隔離，並提供 1/5/10 Mbit/s 等高速等級。"}
+{"category": "客戶可能問的問題", "question": "如果客戶要『2.5 A Gate Driver、5000 Vrms、Wide Body』，ELW3120 是否適合？", "answer": "適合。ELW3120 的產品頁列出最大輸出電流 2.5 A、輸入輸出隔離 5000 Vrms、外部爬電距離大於 10 mm，並可直接驅動 IGBT 或 Power MOSFET。"}
+{"category": "客戶可能問的問題", "question": "如果客戶只說要 AC 負載開關但不需要調功，優先推薦 Zero Cross 還是 Random Phase？", "answer": "若主要是 ON/OFF 開關且重視降低切換突波與 EMI/RFI，可優先考慮 Zero Cross。它在交流零交越附近動作；若需要控制導通角與輸出功率，才更適合 Random Phase。"}
+{"category": "客戶可能問的問題", "question": "如果負載是馬達等感性負載，Triac 控制上有沒有額外風險？", "answer": "有。感性負載的電流會落後電壓，當電流降到零使 TRIAC 關閉時，元件兩端可能仍存在較高電壓，快速 dv/dt 可能造成再次誤觸發。手冊因此建議搭配 RC Snubber 等抑制措施。"}
+{"category": "客戶可能問的問題", "question": "Photo Power Triac 在關閉狀態是不是完全沒有電流？", "answer": "不是。手冊指出 Power TRIAC 在截止狀態仍會有 leakage current，而且漏電流會隨負載電壓增加而增大。設計高阻抗負載或待機功耗時要把這個特性納入考量。"}
+{"category": "客戶可能問的問題", "question": "如果控制訊號的 LED 電流加大，Photo Power Triac 會更快導通嗎？", "answer": "會。ELRX213/ELRX223 應用手冊指出，較高的 LED 驅動電流可縮短 Turn-on time。實際驅動電流仍需落在器件允許範圍內。"}
+{"category": "客戶可能問的問題", "question": "如果我在 220 V AC 上做 Power Triac Snubber，電容耐壓應該抓什麼等級？", "answer": "手冊建議 220 V 線路的 Snubber 電容耐壓選在 400～600 V，常用電容量約 0.1～0.2 µF，並建議使用 MPP 金屬薄膜電容。這是應用建議，仍需依實際負載與法規做驗證。"}
+{"category": "客戶可能問的問題", "question": "110 V AC 的 Power Triac Snubber，電阻大約用什麼範圍？", "answer": "手冊對 110 V 線路給出的 Snubber 電阻一般建議為 10～100 Ω，並提到常見設計可搭配約 0.1 µF 電容。電阻的作用之一是限制 Power TRIAC 導通時的電容放電峰值電流。"}
+{"category": "客戶可能問的問題", "question": "EL3120 是否能在沒有負閘極電源的情況下使用？", "answer": "可以。應用手冊說明 EL3120 可以使用或不使用負電壓來關閉 IGBT；不使用負電壓時，其低準位輸出 VOL 小於 0.5 V，可協助避免米勒效應造成 IGBT 再啟動。實際設計仍需評估雜訊與 layout。"}
+{"category": "客戶可能問的問題", "question": "如果 IGBT 驅動板常受共模雜訊影響，EL3120 有什麼抗擾規格？", "answer": "EL3120 應用手冊標示其共模雜訊抑制能力 CMTI 為 ±25 kV/µs。這項能力是針對功率開關快速電壓變化造成的共模瞬變，用來提升 gate 控制訊號的穩定性。"}
+{"category": "客戶可能問的問題", "question": "EL3120 的 UVLO 對系統安全有什麼直接作用？", "answer": "UVLO 會在驅動器電源過低時停止輸出 IGBT gate 控制訊號。這可避免 gate 電壓不足使 IGBT 落入線性區、造成高功耗與發熱，因此有助於提升驅動電路安全性。"}
+{"category": "客戶可能問的問題", "question": "為什麼 IGBT Gate Driver 的 PCB 路徑建議盡量短？", "answer": "EL3120 應用手冊指出，gate 放電路徑越長，寄生電感與電阻越大，也更容易受到雜訊影響。縮短 driver、Rg 與 IGBT gate 之間的路徑，可降低寄生效應並改善對米勒干擾的抵抗能力。"}
+{"category": "客戶可能問的問題", "question": "如果想降低 IGBT switching loss，把 Rg 一直縮小是不是最好？", "answer": "不是。較小 Rg 確實可加快 gate 充放電並降低切換損失，但也會提高 dV/dt、增加振盪與 EMI。手冊指出效率與 EMI 需要折衷，常見 Rg 設計範圍約 10～30 Ω。"}
+{"category": "客戶可能問的問題", "question": "一般數位隔離中，光耦輸出為什麼有時會出現低準位不夠低？", "answer": "如果輸入 LED 電流 IF 太小，輸出 phototransistor 可能沒有進入適當的飽和開關狀態，使輸出低準位電壓偏高。EL817 實測中 IF=5 mA 時 VOL 仍大於 1 V，而 IF 提高到 10 mA 以上時 VOL 已接近 0 V。"}
+{"category": "客戶可能問的問題", "question": "一般光耦用在 UART 類資料傳輸時，要不要只看 CTR 就好？", "answer": "不能只看 CTR。還要一起考慮 IF、負載電阻 RL、輸出邏輯電壓、Hold time 與傳輸速度；手冊特別指出 IF、CTR(min) 與 RL 的組合會決定輸出高低準位是否能被接收端正確辨識。"}
+{"category": "客戶可能問的問題", "question": "如果一般光耦傳得越快，高準位時間會有什麼風險？", "answer": "手冊的 EL817 實測顯示，傳輸速度越高時，高準位有效 Hold time 會縮短，因為輸入關閉後輸出恢復到高準位需要時間。若接收端要求的最小 Hold time 較長，就可能把高準位判為無效。"}
+{"category": "客戶可能問的問題", "question": "如果客戶問『為什麼 1 kΩ 負載比 4.7 kΩ 反而更適合 EL817 測試』，怎麼解釋？", "answer": "實測中 RL=1 kΩ 時 VCE 已接近 0 V，可讓輸出工作在飽和開關，同時仍保有較快轉態。RL 增加到 4.7 kΩ 雖可維持飽和，但輸出恢復到高準位所需時間更長，會拖慢訊號。"}
+{"category": "客戶可能問的問題", "question": "如果要隔離 PLC 與 MCU 的高速訊號，光耦資料中有直接列這種用途嗎？", "answer": "有。高速光耦應用手冊直接列出 PLC 與 MCU 之間的訊號轉換，並同時列出 PLC 高速計數器、伺服電機與旋轉編碼器控制等應用。"}
+{"category": "客戶可能問的問題", "question": "高速光耦的輸出端如果是 Open Collector，要不要外接電阻？", "answer": "要。以 ELM453 為例，輸出端是 Open Collector，因此需要外接 pull-high 電阻 RL 來建立高準位。VCC 旁也建議放 0.1 µF bypass 電容來濾除電源雜訊。"}
+{"category": "客戶可能問的問題", "question": "如果高速光耦的 pull-up 電阻拉得太大，會影響速度嗎？", "answer": "會。ELM453 應用手冊指出 TPLH/TPHL 受 IF 與 RL 影響，尤其 RL 的影響較大；當 RL 超過約 3 kΩ 後，TPLH 會快速增加，使輸出上升延遲變長。"}
+{"category": "客戶可能問的問題", "question": "ELM453 的 VCC 旁為什麼建議放 0.1 µF 電容？", "answer": "這顆 0.1 µF bypass 電容用來過濾 VCC 電源上的雜訊，降低電源擾動影響高速光耦輸出。它是應用手冊中的建議配置之一。"}
+{"category": "客戶可能問的問題", "question": "如果我要做低輸入電流線路接收器，高速光耦有相對應應用嗎？", "answer": "有。6N13X 與 ELS511/ELS611 的產品應用都列出低輸入電流線路接收器，並同時支援邏輯隔離、微處理器隔離或電流環接收器等用途。"}
+{"category": "客戶可能問的問題", "question": "如果客戶重視封裝選擇，億光光耦有哪些常見封裝家族？", "answer": "資料中可看到 DIP、SOP、SSOP、SDIP、LSOP、Wide Body 以及 Long Creepage 等多種封裝方向，並涵蓋 4-pin、5-pin、6-pin、8-pin、16-pin 等腳位。實際選型要同時看輸入型態、通道數、隔離電壓與速度。"}
+{"category": "客戶可能問的問題", "question": "如果要在同一產品中兼顧小型 SMD 與四通道，ELQ3H7 比 EL847 有什麼封裝差異？", "answer": "ELQ3H7 是 16-pin small outline SMD，偏向高密度小型化；EL847 則是標準 16-pin DIP 並提供 SMD option。兩者都可做四通道，但封裝型態與隔離電壓不同：ELQ3H7 為 3750 Vrms，EL847 為 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "如果要 AC 輸入四通道小型光耦，ELQ3H4 跟一般 EL814 的定位差在哪？", "answer": "ELQ3H4 是 16-pin SSOP-AC 的多通道高密度封裝；EL814 則是 4-pin DIP-AC 的單一 Photo Transistor 方案。兩者都支援 AC 輸入，但 ELQ3H4 偏多通道小型化，EL814 偏標準 DIP。"}
+{"category": "客戶可能問的問題", "question": "如果要求輸入輸出隔離 3750 Vrms，又要 AC 小型 SMD，有哪些例子？", "answer": "EL354N-G 的 4-pin SOP-AC 與 EL3H4-G 的 4-pin SSOP-AC 都符合這個方向。兩者皆為 AC 輸入、CTR 最低 20%（IF=±1 mA、VCE=5 V），隔離電壓為 3750 Vrms。"}
+{"category": "客戶可能問的問題", "question": "如果要求 5000 Vrms 又是雙通道 Photo Darlington，哪個系列符合？", "answer": "EL825 符合。它是雙通道 Photo Darlington，採 8-pin DIP，CTR 為 600%～7500%（IF=1 mA、VCE=2 V），輸入與輸出隔離電壓為 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "如果要求 5000 Vrms 又是雙通道 Photo Transistor，哪個系列符合？", "answer": "EL827 符合。它是雙通道 Photo Transistor，採 8-pin DIP，CTR 50%～600%（IF=5 mA、VCE=5 V），輸入輸出隔離電壓 5000 Vrms。"}
+{"category": "客戶可能問的問題", "question": "如果要求高 CTR 但封裝要 4-pin SMD，EL452-G 的條件是什麼？", "answer": "EL452-G 採 4-pin small outline SMD，CTR 最低 1000%，測試條件 IF=1 mA、VCE=2 V。它同時具有 VCEO>350 V 與 3750 Vrms 隔離，適合小型高 CTR、高輸出耐壓設計。"}
+{"category": "客戶可能問的問題", "question": "如果產品是家電或風扇加熱器，哪些光耦類別的應用頁有提到？", "answer": "多個系列都列出家電或風扇加熱器，例如 EL81X、EL357N-G、EL101X-G/EL111X-G 的 Photo Transistor，以及 EL31X0/ELW3120 等 IGBT Gate Driver。選型要依是否只是訊號隔離，還是要直接驅動功率元件來區分。"}
+{"category": "客戶可能問的問題", "question": "若客戶要隔離一個高壓功率開關的 gate，普通 Photo Transistor 和 Gate Driver 哪個更直接？", "answer": "若目標是直接驅動 IGBT/Power MOSFET gate，應優先使用 IGBT Gate Driver，而不是一般 Photo Transistor。EL31X0/ELS31X0/ELW3120 具功率輸出級與 2.5 A 等級輸出，專門用於 gate drive。"}
+{"category": "客戶可能問的問題", "question": "若客戶只要訊號回授隔離，不需要 2.5 A gate drive，還需要 IGBT Gate Driver 嗎？", "answer": "不一定。若只是低功率訊號隔離或回授，可優先評估一般 Photo Transistor 或 High Speed Coupler；IGBT Gate Driver 是針對直接驅動 IGBT/Power MOSFET gate 的功率輸出需求設計。"}
+{"category": "客戶可能問的問題", "question": "如果客戶要求 AC 110～240 V 控制介面但板子空間小，ELM30XX 能做什麼？", "answer": "ELM30XX 是小型 4-pin SOP Photo Triac Driver，可作為低壓邏輯與 110～240 VAC 設備之間的隔離觸發介面。它可搭配外部 Power TRIAC，用於光源、靜態電源開關、交流馬達、溫度控制等。"}
+{"category": "客戶可能問的問題", "question": "如果客戶的控制對象是 110～380 VAC，ELT30XX 類產品頁有什麼描述？", "answer": "ELT30XX 4-pin DIP Triac Driver 被描述為用於邏輯系統與 110～380 VAC 設備之間的介面，可搭配外部 Power TRIAC。應用包括 SSR、工業控制、馬達、螺線管與消費性電子設備。"}
+{"category": "客戶可能問的問題", "question": "Photo Power Triac 的輸出端 Inhibit Voltage 對 Zero Cross 有什麼意義？", "answer": "ELRX213 的 Zero Cross 控制只有在輸出端接近 0°/180° 時才會允許導通；若 MT1-MT2 電壓差高於 Inhibit Voltage，Power TRIAC 不會被觸發。手冊也指出 Inhibit Voltage 會隨溫度上升而下降。"}
+{"category": "客戶可能問的問題", "question": "若 Power Triac 負載線很長，為什麼手冊建議縮短走線？", "answer": "走線越長，寄生電感越大，開關瞬間更容易產生峰值電壓，可能造成誤動作或元件受損。手冊因此建議盡量縮短走線，並視需要搭配 Snubber 或壓敏電阻。"}
+{"category": "客戶可能問的問題", "question": "如果要選 Snubber 電容材質，手冊偏好哪一種？", "answer": "手冊建議使用 MPP 金屬薄膜電容。一般容量建議約 0.1～0.2 µF，並依 110 V 或 220 V 線路選擇適當耐壓等級。"}
+{"category": "客戶可能問的問題", "question": "220 V Power Triac Snubber 的電阻額定功率有建議嗎？", "answer": "手冊指出 220 V 線路的 Snubber 電阻一般可用 20～100 Ω，額定功率通常建議 2 W 以上。這是為了承受電容充放電造成的功率損失並限制峰值電流。"}
+{"category": "客戶可能問的問題", "question": "110 V Power Triac Snubber 的電阻額定功率通常怎麼抓？", "answer": "手冊對 110 V 線路指出 Snubber 電阻一般為 10～100 Ω，額定功率通常可使用約 1/2 W。實際值仍應依負載、開關頻率與熱條件驗證。"}
+{"category": "客戶可能問的問題", "question": "如果客戶要求工業板上使用的光耦都要能追溯到應用手冊，這批資料有哪些手冊類型？", "answer": "資料包含一般光耦資料傳輸、CTR 量測與計算、高速光耦 1 Mbps 電路設計、General Purpose SSR、Photo TRIAC、Photo Power TRIAC ELRX213/X223、EL3120 IGBT Gate Driver，以及 Photo Coupler Selection Guide 等文件，可分別支援不同選型與設計問題。"}
+{"category": "客戶可能問的問題", "question": "如果客戶問『光耦是不是只能做數位訊號』，從這批產品類別來看怎麼回答？", "answer": "不是。資料除了數位訊號隔離的 Photo Transistor 與 High Speed Coupler，還包含 SSR、Photo Triac/Photo Power Triac、IGBT Gate Driver 等，用於負載切換、AC 控制與功率元件 gate drive。光耦相關產品的用途遠不只一般數位通訊。"}
+{"category": "客戶可能問的問題", "question": "如果客戶同時在意抗雜訊與脈衝整形，應優先看哪種特殊輸出類型？", "answer": "可優先看 Schmitt Trigger 光耦。H11LX 的內建 Schmitt trigger 提供 hysteresis，因此能增加 noise immunity 並進行 pulse shaping，適合線路接收器與 AC-to-TTL 方波整形。"}
+{"category": "客戶可能問的問題", "question": "如果客戶要『常開、雙通道、最高到 1200 V 負載』，哪個 SSR 系列方向最符合？", "answer": "EL8XXA 最符合這組條件。產品頁列出雙通道、常開型光電開關，負載電壓包含 400 V、600 V、1200 V，並提供 5000 Vrms 輸入輸出隔離。"}
+{"category": "客戶可能問的問題", "question": "如果客戶要『常開、單通道、小型 SMD、最高到 600 V 負載』，哪個系列方向較合適？", "answer": "可優先看 ELM4XXA。它是 4-pin small outline SMD 的單通道 Form-A SSR，負載電壓涵蓋 60～600 V，輸入輸出隔離為 3750 Vrms。"}
+{"category": "客戶可能問的問題", "question": "如果客戶要求『四通道、5000 Vrms、標準 DIP』，哪個 Photo Transistor 最直接？", "answer": "EL847 是最直接的選擇。它在 16-pin DIP 中提供四個隔離通道，CTR 50%～600%（IF=5 mA、VCE=5 V），隔離電壓 5000 Vrms，並另有 SMD option。"}
+{"category": "客戶可能問的問題", "question": "如果客戶要求『四通道、小型 SMD、3750 Vrms』，哪個 Photo Transistor 可優先看？", "answer": "可優先看 ELQ3H7。它在 16-pin small outline SMD 中提供四通道，CTR 最低 50%（IF=5 mA、VCE=5 V），輸入輸出隔離 3750 Vrms。"}
+{"category": "工程師可能問的問題", "question": "設計光耦前，CTR 應該如何從 IF 與 IC 定義？", "answer": "CTR（Current Transfer Ratio）定義為輸出電流 IC 與輸入電流 IF 的比值：CTR = IC / IF × 100%。它可視為光耦的電流傳輸倍率，但不是固定常數，會受到 IF、元件差異與環境溫度影響。"}
+{"category": "工程師可能問的問題", "question": "如果量到 IF=4 mA、IC=8 mA，依 CTR 定義可得到多少？", "answer": "依 CTR = IC/IF ×100%，代入 IF=4 mA、IC=8 mA，可得 CTR = 8/4 ×100% = 200%。這只代表該量測條件下的傳輸比，不能直接假設換另一個 IF 後仍維持 200%。"}
+{"category": "工程師可能問的問題", "question": "為什麼不能把某一個 IF 條件下量到的 CTR 當成固定增益？", "answer": "因為應用手冊明確指出 CTR 會隨 IF 改變，也會受到環境溫度與元件本身特性影響。例如 EL817 在不同 IF 與溫度下的 CTR 正規化倍率會改變，因此實際設計必須用對應工作條件重新估算。"}
+{"category": "工程師可能問的問題", "question": "如果要在實驗室直接量 CTR，最少需要哪些量測點？", "answer": "至少要量輸入 LED 電流 IF 與輸出電流 IC，再用 IC/IF×100% 計算 CTR。手冊示例使用兩台三用電表，分別串接在輸入迴路與輸出迴路量測這兩個電流。"}
+{"category": "工程師可能問的問題", "question": "EL817 在 Ta=25°C、IF=5 mA 時為什麼常被當成 CTR 正規化基準？", "answer": "手冊的 EL817 正規化曲線以 Ta=25°C、IF=5 mA 對應 CTR 倍率 1.0 作為基準。後續不同 IF 或不同溫度的 CTR 都可相對於這個基準倍率進行修正。"}
+{"category": "工程師可能問的問題", "question": "EL817C 原始 CTR 為 200%～400%，若工作條件使正規化倍率變成 0.8，新的 CTR 範圍怎麼算？", "answer": "將原始範圍乘以 0.8：200%×0.8=160%，400%×0.8=320%，因此新的 CTR 約為 160%～320%。手冊用 Ta=70°C、IF=5 mA 的例子示範這種修正方式。"}
+{"category": "工程師可能問的問題", "question": "EL817C 在 IF=5 mA、CTR 修正後為 160%～320% 時，IC 應落在什麼範圍？", "answer": "依 IC=IF×CTR，最小 IC=5 mA×160%=8 mA，最大 IC=5 mA×320%=16 mA，所以約為 8～16 mA。這是手冊 Ta=70°C 範例中的計算結果。"}
+{"category": "工程師可能問的問題", "question": "若 EL817C 在 IF=2 mA 時的 CTR 修正範圍為 96%～192%，輸出 IC 怎麼估？", "answer": "最小 IC=2 mA×96%=1.92 mA，最大 IC=2 mA×192%=3.84 mA，因此約為 1.92～3.84 mA。這對應手冊在 Ta=80°C、正規化倍率 0.48 的示例。"}
+{"category": "工程師可能問的問題", "question": "做 worst-case 輸出低準位估算時，為什麼應優先用 CTR(min)？", "answer": "因為較低 CTR 代表在相同 IF 下能得到的 IC 較小，也比較不容易把輸出 phototransistor 拉進飽和低準位。使用 CTR(min) 可保守評估 RXD 低準位是否仍能低於接收端 VIL。"}
+{"category": "工程師可能問的問題", "question": "一般光耦的 RXD 低準位可以用什麼關係式先估算？", "answer": "當 IF=ON 時，手冊給出的關係為 RXD=VCE=VCC−IC×RL，其中 IC 可先用 IF×CTR(min) 估算。這能用來檢查輸出低準位是否落在接收器可接受的 VIL 以下。"}
+{"category": "工程師可能問的問題", "question": "當光耦輸入 LED 關閉時，RXD 高準位為什麼通常接近 VCC？", "answer": "IF=OFF 時輸出 phototransistor 幾乎不導通，因此 pull-up 負載上的壓降很小，RXD 會被拉回接近 VCC。手冊因此以 RXD(high)≈VCC 作為簡化設計關係。"}
+{"category": "工程師可能問的問題", "question": "直接用 GPIO 加限流電阻驅動 LED 時，Rin 要怎麼由 IF 反推？", "answer": "手冊的直接 LED 驅動關係為 IF(typ.)=(Vin−VF(typ.))/Rin，因此 Rin=(Vin−VF(typ.))/IF(typ.)。設計時仍需用實際 LED VF 範圍與 GPIO 驅動能力做 worst-case 檢查。"}
+{"category": "工程師可能問的問題", "question": "用 NPN BJT 當光耦 LED 開關時，IF 計算式和直接 GPIO 有什麼差異？", "answer": "BJT 驅動時還要扣除 transistor 的 VCE，因此 IF=(Vin−VF−VCE)/Rin。對應的 Rin=(Vin−VF−VCE)/IF，這比直接 GPIO 驅動多了 BJT 導通壓降項。"}
+{"category": "工程師可能問的問題", "question": "用 N-MOSFET 驅動光耦 LED 時，限流計算要扣掉哪個壓降？", "answer": "要扣除 MOSFET 的 VDS，因此 IF=(Vin−VF−VDS)/Rin，或 Rin=(Vin−VF−VDS)/IF。這是手冊對 N-MOSFET LED 開關驅動所列的估算式。"}
+{"category": "工程師可能問的問題", "question": "在數位隔離設計中，VOH、VOL、VIH、VIL 分別扮演什麼角色？", "answer": "VOH 是輸出端邏輯 1 的最低輸出電壓，VOL 是邏輯 0 的最高輸出電壓；VIH 是接收端判定 1 的最低輸入電壓，VIL 是接收端判定 0 的最高輸入電壓。可靠設計需確保 VOH>VIH 且 VOL<VIL。"}
+{"category": "工程師可能問的問題", "question": "為什麼 VOH 只高一點點超過 VIH 會讓雜訊容忍度變差？", "answer": "VOH 與 VIH 之間的電壓餘量就是高準位 noise margin 的一部分。若兩者太接近，線路受到靜電、磁場或其他感應雜訊時，接收端較容易跨過判斷門檻而誤判。"}
+{"category": "工程師可能問的問題", "question": "如果接收器要求高低準位至少維持 22 µs，但光耦輸出高準位只有 20 µs，會發生什麼？", "answer": "依手冊示例，高準位 20 µs 小於要求的 22 µs，因此可能不被接收端視為有效訊號。可採取延長輸入高準位時間、降低 RL，或在軟體允許時調整有效 Hold time 判斷等方式改善。"}
+{"category": "工程師可能問的問題", "question": "為改善光耦高準位 Hold time，降低 RL 為什麼不是沒有代價？", "answer": "降低 RL 可以加快某些轉態，但也會改變輸出電流需求與 VCE 工作點，因此必須確認 phototransistor 仍能進入適當的飽和開關狀態。手冊把這項方法列為改善 Hold time 的方式之一，但要求同時考慮飽和條件。"}
+{"category": "工程師可能問的問題", "question": "EL817 實測中 IF=5 mA 時，若後端 VIL=0.8 V，為什麼可能判不到 Low？", "answer": "手冊量到 IF=5 mA 時 VOL 仍大於 1 V，已高於後端 VIL=0.8 V 的低準位上限。因此即使輸出看似下降，接收器也可能不把它認成有效 Low。"}
+{"category": "工程師可能問的問題", "question": "EL817 把 IF 從 5 mA 提高到 10 mA 以上，低準位改善的原因是什麼？", "answer": "較大的 IF 讓輸出 phototransistor 更快取得足夠 IC 並進入飽和開關狀態，因此 VCE/VOL 下降。手冊實測指出 IF=10 mA 以上時 VOL 已接近 0 V。"}
+{"category": "工程師可能問的問題", "question": "EL817 在 IF=10 mA、RL=1 kΩ 的速度測試中，2400、4800、9600 bps 對應的頻率各是多少？", "answer": "手冊列出的對應值為 2400 bps→1.2 kHz、4800 bps→2.4 kHz、9600 bps→4.8 kHz。這組條件用來比較高低準位 Hold time 隨傳輸速度增加的變化。"}
+{"category": "工程師可能問的問題", "question": "EL817 在 2400 bps 測試時，高低準位 Hold time 相差多少？", "answer": "低準位約 466 µs，高準位約 374 µs，兩者相差約 92 µs。手冊指出高準位較短，主要是因輸入關閉後輸出恢復到高準位需要額外時間。"}
+{"category": "工程師可能問的問題", "question": "EL817 在 4800 bps 測試時，高低準位 Hold time 相差多少？", "answer": "低準位約 256 µs，高準位約 165 µs，相差約 91 µs。雖然絕對時間隨速度提高而縮短，但高低準位的差值仍接近 90 µs。"}
+{"category": "工程師可能問的問題", "question": "EL817 在 9600 bps 測試時，高低準位 Hold time 相差多少？", "answer": "低準位約 152 µs，高準位約 59 µs，相差約 93 µs。由於週期縮短，高準位恢復延遲佔整個週期的比例更大，因此高準位 duty 會更明顯縮短。"}
+{"category": "工程師可能問的問題", "question": "為什麼 EL817 的高低準位時間差大致不變，但速度越快問題越嚴重？", "answer": "手冊中的差值約維持 91～93 µs，但資料速率提高後一個 bit 的總時間變短，所以固定延遲占整個週期的比例增加。結果就是高準位 duty 越來越短，更容易低於接收端要求的 Hold time。"}
+{"category": "工程師可能問的問題", "question": "EL817 在 RL=100 Ω、CTR=327%、IF=5 mA 時，IC 和 VCE 怎麼得到？", "answer": "IC=5 mA×327%=16.35 mA；VRL=16.35 mA×100 Ω=1.635 V；若 VCC=5 V，則 VCE=5−1.635=3.265 V。這表示 100 Ω 時輸出低準位仍很高，尚未形成理想飽和 Low。"}
+{"category": "工程師可能問的問題", "question": "把 EL817 的 RL 從 100 Ω 增加到 330 Ω，VCE 會朝哪個方向變化？", "answer": "手冊實測顯示 VCE 會逐漸下降，更接近飽和開關狀態。這是因相同輸出電流在較大 RL 上產生更大壓降，使 collector 端電壓降低。"}
+{"category": "工程師可能問的問題", "question": "為什麼 EL817 的 RL=1 kΩ 在該實測中是一個較好的折衷？", "answer": "RL=1 kΩ 時 VCE 已接近 0 V，可進入飽和開關，同時轉態速度仍較快。再增大到 4.7 kΩ 雖仍可得到低 VCE，但輸出回復高準位會變慢。"}
+{"category": "工程師可能問的問題", "question": "ELM453 為何採用 Photodiode 加 Transistor 的高速輸出架構？", "answer": "Photodiode 本身響應較快，可先把光訊號快速轉成光電流，再由 transistor 將訊號放大。這種架構用來改善傳統 phototransistor coupler 的速度限制，支援高速資料傳輸。"}
+{"category": "工程師可能問的問題", "question": "ELM453 的 Open Collector 輸出如果沒有 pull-up RL，會有什麼問題？", "answer": "Open Collector 本身只能主動拉低，無法自行建立穩定高準位，因此需要 RL 拉到 VCC。沒有 pull-up 時，輸出高準位可能浮動，邏輯電壓無法正常定義。"}
+{"category": "工程師可能問的問題", "question": "ELM453 的 bypass 電容放在 VCC 旁主要在抑制哪一類問題？", "answer": "手冊建議 0.1 µF bypass 電容來濾除 VCC 電源雜訊。高速切換對供電擾動較敏感，因此局部去耦可降低電源波動傳到輸出邏輯的風險。"}
+{"category": "工程師可能問的問題", "question": "ELM453 在 IF=5 mA 時 CTR 正規化變成 0.92 倍，原本 20%～50% 會變成多少？", "answer": "將原範圍乘以 0.92，可得 18.4%～46%。這表示降低 IF 會改變有效 CTR，不能只用規格表的 nominal 測試條件直接套到所有工作點。"}
+{"category": "工程師可能問的問題", "question": "ELM453 溫度從 25°C 升到 85°C，若 CTR 溫度倍率為 1.2，20%～50% 會變成多少？", "answer": "只考慮溫度倍率時，20%×1.2=24%，50%×1.2=60%，因此約為 24%～60%。手冊也示範若再同時考慮 IF=5 mA 的 0.92 倍，需把兩個倍率相乘。"}
+{"category": "工程師可能問的問題", "question": "ELM453 同時有 IF 倍率 0.92 和溫度倍率 1.2 時，總修正倍率約多少？", "answer": "兩者相乘為 0.92×1.2=1.104，手冊近似為 1.1 倍。若原 CTR 為 20%～50%，修正後約為 22%～55%。"}
+{"category": "工程師可能問的問題", "question": "ELM453 在修正後 CTR=22%～55%、IF=5 mA 時，Io 範圍是多少？", "answer": "Io=IF×CTR，因此最小約 5 mA×22%=1.1 mA，最大約 5 mA×55%=2.75 mA。手冊指出若 Io 太小，可能造成輸出邏輯準位不符合接收端要求。"}
+{"category": "工程師可能問的問題", "question": "ELM453 的 TPHL 和 TPLH 分別代表哪個轉態？", "answer": "TPHL 是輸出從 High 下降到 Low 的傳播延遲，TPLH 是輸出從 Low 上升到 High 的傳播延遲。這兩個參數用來描述輸入變化經過光耦後到輸出反應的時間。"}
+{"category": "工程師可能問的問題", "question": "ELM453 傳播延遲規格的示例測試條件為何？", "answer": "手冊列出的 propagation delay 測試條件為 IF=16 mA、RL=1.9 kΩ。使用不同 IF 或 RL 時，實際 TPHL/TPLH 可能改變，因此不能直接把該值當成所有條件下的固定延遲。"}
+{"category": "工程師可能問的問題", "question": "為什麼 ELM453 的 RL 過大會讓 TPLH 特別惡化？", "answer": "Open Collector 輸出回到 High 主要靠 pull-up RL 與節點電容充電；RL 越大，RC 上升時間越長。手冊指出 RL 超過約 3 kΩ 後，TPLH 會快速增加。"}
+{"category": "工程師可能問的問題", "question": "若 ELM453 的 VCC=5 V、VO=0.4 V、RL=1.9 kΩ，輸出電流大約多少？", "answer": "Io=(VCC−VO)/RL=(5−0.4)/1.9 kΩ≈2.42 mA。這個計算可用來確認在指定低準位與 pull-up 條件下，輸出 transistor 需要吸收的電流。"}
+{"category": "工程師可能問的問題", "question": "SSR 的 IF(on) Max. 在設計上應怎麼解讀？", "answer": "IF(on) 是讓輸出端可靠開啟所需的輸入 LED 電流門檻，規格書的 Max. 值可視為設計至少要達到的電流。手冊建議實際 IF 設計在這個 Max. 值以上，以涵蓋 LED 強度差異。"}
+{"category": "工程師可能問的問題", "question": "EL4XXA 的 IF(on) 設計為什麼建議至少 5 mA？", "answer": "手冊以 EL4XXA 為例指出，IF 應設計在規格書 IF(on) Max. 以上，示例為 5 mA 以上。這可確保 IR LED 光強足以讓 Photodiode array 為 Driver circuit 產生足夠電壓，進而打開輸出 MOSFET。"}
+{"category": "工程師可能問的問題", "question": "SSR 為什麼還要在 IF(on) 之上再乘 1.25～1.5 的裕量？", "answer": "IR LED 會隨使用時間逐漸光衰，若只設計在剛好 IF(on) 門檻，老化後可能無法提供足夠光能。手冊因此建議工作 IF 約為 IF(on)×1.25～1.5，以提高長期可靠度。"}
+{"category": "工程師可能問的問題", "question": "SSR 範例中若 5 V 驅動、VF=1.2 V、串聯路徑另有 0.4 V 壓降、R=510 Ω，IF 約多少？", "answer": "IF=(5−1.2−0.4)/510≈6.67 mA。這個結果高於 EL4XXA 示例建議的 5 mA，可提供一定的驅動裕量。"}
+{"category": "工程師可能問的問題", "question": "SSR 的 Driver circuit 為什麼不需要外部獨立電源直接供給 MOSFET gate？", "answer": "手冊說明輸出側的 Photodiode array 會把輸入 LED 的光能轉成電能，提供 Driver circuit 所需電源，再由 Driver circuit 產生 MOSFET gate 電壓。因此輸入與輸出仍能保持電氣隔離。"}
+{"category": "工程師可能問的問題", "question": "SSR 的 Ton 與 Toff 是用什麼百分比準位定義的？", "answer": "Ton 是輸入開啟後，輸出轉態到 90% 準位所需的時間；Toff 是輸入關閉後，輸出轉態到 10% 準位所需的時間。兩者共同描述 SSR 的開關速度。"}
+{"category": "工程師可能問的問題", "question": "Photo Triac 的 Zero Cross 與 Random Phase 在控制自由度上有何根本差異？", "answer": "Zero Cross 只允許在交流電壓接近零交越時觸發，因此自由度較低但可減少切換干擾；Random Phase 可以在正弦波任意相位觸發，能控制導通角與輸出功率，但會產生較多諧波與雜訊。"}
+{"category": "工程師可能問的問題", "question": "TRIAC 一旦觸發後，移除 Gate 訊號為什麼不一定立刻截止？", "answer": "TRIAC 具有閉鎖特性，導通後必須等主電流降到維持電流 IH 以下，或主電流被其他方式中斷，才會回到截止。這也是 AC 負載通常在電流過零附近自然關斷的原因。"}
+{"category": "工程師可能問的問題", "question": "感性負載為什麼會提高 TRIAC 的 dv/dt 誤觸發風險？", "answer": "感性負載電流落後電壓，所以當電流降到零讓 TRIAC 關閉時，元件兩端可能仍有較高瞬時電壓。若這個電壓快速上升形成高 dv/dt，就可能再次把 TRIAC 誤觸發導通。"}
+{"category": "工程師可能問的問題", "question": "RC Snubber 降低 TRIAC 誤觸發的物理機制是什麼？", "answer": "Snubber 的 RC 網路限制 TRIAC 兩端電壓的上升速率，降低 dv/dt，因而減少由快速電壓變化造成的誤觸發。R 同時限制 C 在 TRIAC 導通時的放電峰值電流。"}
+{"category": "工程師可能問的問題", "question": "Power Triac 的 Snubber 若只放電容、不放電阻，主要風險是什麼？", "answer": "TRIAC 導通瞬間，Snubber 電容可能產生很高的放電峰值電流，過大的電流可能損壞內部元件。因此手冊要求串入 R 來限制充放電電流與 dv/dt。"}
+{"category": "工程師可能問的問題", "question": "Photo Power Triac 手冊為什麼建議 C 約 0.1～0.2 µF？", "answer": "這個範圍可用來把 dv/dt 控制到較低水準，手冊也列出常用建議 C=0.1 µF。電容材質建議 MPP 金屬薄膜，耐壓則依 110 V 或 220 V 線路選擇。"}
+{"category": "工程師可能問的問題", "question": "220 V 線路採 RC Snubber 時，手冊給的 R 與 C 大致範圍為何？", "answer": "C 一般約 0.1～0.2 µF，耐壓建議 400～600 V；R 一般約 20～100 Ω，額定功率通常建議 2 W 以上。這些是手冊的設計參考值，實際仍需依負載驗證。"}
+{"category": "工程師可能問的問題", "question": "110 V 線路採 RC Snubber 時，手冊給的 R 與 C 大致範圍為何？", "answer": "C 一般約 0.1～0.2 µF，耐壓建議 250～400 V；R 一般約 10～100 Ω，額定功率通常約 1/2 W。實際設計還要考慮負載性質、共振與熱條件。"}
+{"category": "工程師可能問的問題", "question": "ELRX213 的 Zero Cross 為什麼會受到 Inhibit Voltage 限制？", "answer": "ELRX213 只有在輸出端電壓接近零交越時才允許觸發；若 MT1-MT2 電壓差仍高於 Inhibit Voltage，Power TRIAC 不會被導通。手冊也指出 Inhibit Voltage 會隨溫度升高而下降。"}
+{"category": "工程師可能問的問題", "question": "ELRX223 在輸入 OFF 後為什麼不會立刻截止？", "answer": "雖然 ELRX223 是 Random Phase，輸入 ON 時可以立即觸發，但 Power TRIAC 導通後具有閉鎖作用。輸入 OFF 後仍要等負載電流下降到接近零或低於維持電流時才截止。"}
+{"category": "工程師可能問的問題", "question": "Photo Power Triac 的 off-state leakage current 會隨哪個外部條件變大？", "answer": "手冊指出在截止狀態下仍有 leakage current，且負載電壓 VL 增加時漏電流會隨之增大。因此高電壓或高阻抗負載設計要注意關斷時並非理想零電流。"}
+{"category": "工程師可能問的問題", "question": "ELRX213/ELRX223 的最大允許導通電流從什麼溫度開始明顯需要降額？", "answer": "手冊指出當操作溫度大於 40°C 後，Power TRIAC 的最大允許導通電流開始逐漸降低。這表示熱設計與環境溫度會直接影響可安全使用的負載電流。"}
+{"category": "工程師可能問的問題", "question": "IGBT 為什麼同時具有 MOSFET 與 BJT 的特性？", "answer": "手冊把 IGBT 描述為結合 MOSFET 與 BJT 特性的元件，具有 MOSFET 的快速開關能力與 BJT 的高電流導通性能，同時具較低導通壓降與較高耐壓。這使它常被用於高效率功率控制。"}
+{"category": "工程師可能問的問題", "question": "IGBT 規格中的 Cies、Cres、Coes 對應哪些寄生電容組合？", "answer": "手冊列出 Cies=CGE+CGC，Cres=CGC，Coes=CGC+CCE。其中 CGC 是 Miller capacitance，CGE 是 gate-emitter/input capacitance，CCE 是 output capacitance。"}
+{"category": "工程師可能問的問題", "question": "IGBT 的 Miller plateau 為什麼會影響 switching speed？", "answer": "Miller plateau 期間主要是 CGC 在充電或放電，gate 電壓暫時維持近似平坦。CGC 越大或驅動電流越小，平台時間越長，IGBT 完成 VCE 轉換所需時間也越長，因此影響開關速度與損耗。"}
+{"category": "工程師可能問的問題", "question": "IGBT 導通時 t1 到 t2 為什麼是重要的 switching loss 區段？", "answer": "手冊說明 t1～t2 時 gate 已超過 VGE(th)，IC 開始上升，但 VCE 仍維持高電壓，因此同時存在較大電流與高電壓，切換損失最大。設計時需控制 di/dt 與 gate drive 速度。"}
+{"category": "工程師可能問的問題", "question": "IGBT 的 Rg 變小，dVCE/dt 與 gate current 會怎麼變？", "answer": "手冊指出 Rg 越小，gate 充放電路徑阻抗越低，因此 gate current 增大，dVCE/dt 也變大。這會縮短 switching time、降低 switching loss，但可能增加振盪與 EMI。"}
+{"category": "工程師可能問的問題", "question": "為什麼手冊一般建議 IGBT 的 Rg 落在約 10～30 Ω，而不是越小越好？", "answer": "較小 Rg 雖能加快切換、降低切換損失，但會讓輸入電容與寄生電感更容易振盪，也提高 dV/dt 與 EMI。10～30 Ω 是手冊提到的常見設計範圍，用來在效率、穩定性與 EMI 之間折衷。"}
+{"category": "工程師可能問的問題", "question": "關閉 IGBT 時使用負 gate voltage 的目的不是什麼？它實際是為了解決哪個問題？", "answer": "負 gate voltage 不是為了提高導通能力，而是讓關斷時 gate 維持在 0 V 以下，增加對 Miller effect 的抗擾能力。這可降低 collector 電壓快速變化透過 CGC 把 gate 拉高、造成誤導通的風險。"}
+{"category": "工程師可能問的問題", "question": "在 IGBT 的 Gate-Emitter 之間反接 Zener diode，主要保護機制是什麼？", "answer": "Zener diode 用來箝位 Gate-Emitter 的過電壓，避免快速 dv/dt 或耦合效應把 VGE 拉得過高而擊穿 gate。手冊明確指出此配置可保護 VGE 不被過壓損壞。"}
+{"category": "工程師可能問的問題", "question": "EL3120 的最大 gate drive 電流與 CMTI 分別是多少？", "answer": "EL3120 應用手冊列出最大驅動電流 2.5 A，並標示 ±25 kV/µs 的共模雜訊抑制能力 CMTI。這兩項規格分別對應 gate 充放電能力與高 dv/dt 環境下的抗共模瞬變能力。"}
+{"category": "工程師可能問的問題", "question": "EL3120 的總功耗模型為什麼要分成三部分？", "answer": "手冊把總功耗寫成 Ptot=PEmitter+PInternal+POutput，分別代表輸入 LED 發射器功耗、驅動器內部靜態耗電，以及輸出級在 gate 充放電時產生的功耗。三者的物理來源不同，便於分別估算與熱設計。"}
+{"category": "工程師可能問的問題", "question": "EL3120 的 PEmitter 要如何由 IF、VF 與 Duty 計算？", "answer": "公式為 PEmitter=IF×VF×D，其中 D 是 LED 最大 duty cycle。若 IF 或 duty 增加，輸入發射器的平均功耗會按比例增加。"}
+{"category": "工程師可能問的問題", "question": "EL3120 的 PInternal 公式如何反映正負供電？", "answer": "手冊給出 PInternal=ICC×(VCC−VEE)。當使用正、負雙電源時，驅動器實際跨越的供電電壓是 VCC 與 VEE 的差，因此靜態功耗要乘上這個總電壓差。"}
+{"category": "工程師可能問的問題", "question": "EL3120 範例中 VCC=18 V、VEE=-6 V、ICC=3.2 mA，PInternal 是多少？", "answer": "供電差 ΔV=18−(-6)=24 V，因此 PInternal=3.2 mA×24 V=76.8 mW。這與手冊範例計算一致。"}
+{"category": "工程師可能問的問題", "question": "EL3120 範例中 IF=10 mA、VF=1.8 V、Duty=60%，PEmitter 是多少？", "answer": "PEmitter=10 mA×1.8 V×0.6=10.8 mW。手冊最後總功耗範例即使用這個輸入發射器功耗。"}
+{"category": "工程師可能問的問題", "question": "EL3120 範例中 ROH=1 Ω、VGE=24 V、Qg=1.4 µC、fsw=10 kHz，且分母 ROH+Rg+RGint=9.6 Ω 時，POutput 約多少？", "answer": "依手冊簡化式 POutput=ROH×VGE×Qg×fsw/(ROH+Rg+RGint)，代入後約為 35 mW。這是範例總功耗 122.6 mW 中的輸出切換功耗部分。"}
+{"category": "工程師可能問的問題", "question": "EL3120 範例的三項功耗 10.8、76.8、35 mW 加總後是多少？", "answer": "總功耗 Ptot=10.8+76.8+35=122.6 mW。手冊指出此值小於規格書的 300 mW，因此範例條件下未超出額定功耗。"}
+{"category": "工程師可能問的問題", "question": "EL3120 範例為什麼要先估 ROH 與 ROL？", "answer": "ROH/ROL 是 gate 充電與放電路徑中的內部輸出電阻，會影響 peak gate current、Rg 最小值與 output power loss。手冊用輸出壓降除以 2.5 A 峰值電流，估得 ROH 約 1 Ω、ROL 約 0.88 Ω。"}
+{"category": "工程師可能問的問題", "question": "EL3120 範例中，ROH=2.5V/2.5A 為多少？ROL=2.2V/2.5A 又是多少？", "answer": "ROH=1 Ω；ROL=0.88 Ω，手冊近似為 1 Ω。這些值後續用於 gate resistor 與功耗估算。"}
+{"category": "工程師可能問的問題", "question": "若 EL3120 使用 VCC=18 V、VEE=-6 V、Ig_peak=2.5 A，總 gate 路徑阻抗至少要多少？", "answer": "依手冊式子，ROL+Rg+RGint>(VCC−VEE)/Ig_peak=24 V/2.5 A=9.6 Ω。這個限制用來避免驅動峰值電流超過 2.5 A。"}
+{"category": "工程師可能問的問題", "question": "若上述 EL3120 範例中 ROL≈1 Ω、RGint=1.3 Ω，Rg 最小值應大於多少？", "answer": "由總路徑阻抗需大於 9.6 Ω，可得 Rg>9.6−1−1.3=7.3 Ω。手冊還建議實際 Rg 比計算最小值稍大，以降低不穩定與 EMI 風險。"}
+{"category": "工程師可能問的問題", "question": "EL3120 範例使用的 IGBT FF150R12ME3G，其 Qg、VCES、RGint 分別是多少？", "answer": "手冊範例列出 Qg=1.4 µC、VCES=1200 V、RGint=1.3 Ω。這些參數分別影響 gate 驅動能量、器件耐壓與 gate 回路阻抗。"}
+{"category": "工程師可能問的問題", "question": "EL3120 範例的 operating conditions 中，VCC、VEE、fsw、Duty 分別設定多少？", "answer": "手冊列出 VCC=18 V、VEE=-6 V、fsw=10 kHz、PWM Duty=60%。此外 IF=10 mA、ICC=3.2 mA、Io_peak=2.5 A，作為後續功耗與 Rg 計算基礎。"}
+{"category": "工程師可能問的問題", "question": "為什麼 EL3120 的功耗計算結果還要搭配散熱設計，而不是只確認低於額定功耗？", "answer": "驅動器工作會發熱，溫升會影響穩定性與周邊電路，因此即使計算值低於額定功耗，仍需考慮實際 PCB 與環境散熱。手冊建議可利用空氣對流與加大 PCB 鋪銅面積提升散熱能力。"}
+{"category": "工程師可能問的問題", "question": "為什麼一般光耦設計時 IF、CTR(min)、RL 三個參數必須一起看？", "answer": "IF 與 CTR(min) 決定最差情況可得到的 IC，而 IC 與 RL 又共同決定輸出 VCE=VCC−IC×RL。三者互相耦合，會直接影響 Low 是否低於 VIL、High 回復速度與 phototransistor 是否飽和。"}
+{"category": "工程師可能問的問題", "question": "如果光耦設計只追求更大的 RL，為什麼可能犧牲資料速率？", "answer": "較大的 RL 雖可讓輸出更容易拉到低 VCE，但節點回到 High 時要經由較大的電阻充電，因此 RC 時常數變大。EL817 實測中 RL=4.7 kΩ 的高準位恢復時間明顯比 1 kΩ 長。"}
+{"category": "工程師可能問的問題", "question": "為什麼高速光耦的 CMR/CMTI 與隔離電壓不能視為同一個規格？", "answer": "隔離電壓描述輸入與輸出之間可承受的電氣隔離能力；CMR/CMTI 則描述面對快速共模電壓變化時，訊號不被干擾的能力。兩者處理的是不同失效機制，因此選型時需要分開檢查。"}

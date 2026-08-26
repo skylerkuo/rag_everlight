@@ -2,7 +2,11 @@
 
 This document describes the architecture, data flow, retrieval method, multimodal PDF handling, and design decisions implemented in this repository.
 
+<<<<<<< HEAD
 The system is a local multi-source RAG pipeline for technical product documents. It ingests crawler-produced HTML/TXT data and PDF files, converts both sources into structured Markdown, chunks the Markdown, builds a BGE-M3 hybrid dense+sparse index, retrieves a small evidence set, and uses Qwen3.5-4B as the final multimodal answer model. When retrieved evidence comes from a PDF, the exact source page image can also be attached to the final answer stage so the model can verify tables, figures, formulas, and layout details against the original page.
+=======
+The system is a local multi-source RAG pipeline for technical product documents. It ingests crawler-produced HTML/TXT data and PDF files, converts both sources into structured Markdown, chunks the Markdown, builds a BGE-M3 hybrid dense+sparse index, retrieves candidate evidence, and uses Qwen3.5-4B as the final multimodal answer model. The `rag_loop_v2.py` batch path adds a dedicated `BAAI/bge-reranker-v2-m3` second-stage reranker between BGE-M3 candidate retrieval and final Top-K selection. When retrieved evidence comes from a PDF, the exact source page image can also be attached to the final answer stage so the model can verify tables, figures, formulas, and layout details against the original page.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 ---
 
@@ -454,11 +458,17 @@ The answer-system prompt requires Qwen to:
 
 ---
 
+<<<<<<< HEAD
 ## 9. Entity-aware retrieval used by `rag_loop.py` and `rag_ans.py`
 
 The repository also contains a second online retrieval path used for batch evaluation and the interactive terminal.
 
 This path adds a query-analysis step before BGE-M3 retrieval.
+=======
+## 9. Entity-aware retrieval used by `rag_loop.py`, `rag_loop_v2.py`, and `rag_ans.py`
+
+The repository also contains entity-aware retrieval paths used for batch evaluation and the interactive terminal. These paths add a query-analysis step before BGE-M3 retrieval. `rag_loop_v2.py` further adds a dedicated cross-encoder reranking stage.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 ```text
 original question
@@ -473,7 +483,13 @@ BGE-M3 broad candidate retrieval
       ↓
 Exact Product Filter when a product/model was detected
       ↓
+<<<<<<< HEAD
 final Top-K (default 5)
+=======
+rag_loop.py / rag_ans.py: final Top-K
+      │
+      └─ rag_loop_v2.py: bge-reranker-v2-m3 -> final Top-K
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
       ↓
 Qwen3.5 grounded multimodal answer
 ```
@@ -526,7 +542,43 @@ EL827  does not match EL8270
 
 If no candidate contains the extracted name, the system falls back to the unfiltered candidate list instead of returning no evidence.
 
+<<<<<<< HEAD
 This filter is useful for part-number-heavy product corpora but is only present in `rag_loop.py` / `rag_ans.py`; the basic `rag.py ask` path does not use it.
+=======
+This filter is useful for part-number-heavy product corpora and is used by `rag_loop.py`, `rag_loop_v2.py`, and `rag_ans.py`; the basic `rag.py ask` path does not use it.
+
+### 9.5 Dedicated reranking in `rag_loop_v2.py`
+
+Implementation: `rag_app/retrieval/reranker.py`
+
+`rag_loop_v2.py` treats BGE-M3 as the high-recall candidate retriever and uses a separate cross-encoder model for the second-stage ranking:
+
+```text
+BAAI/bge-m3
+      ↓
+broad candidate pool (default 30 in v2)
+      ↓
+Exact Product Filter
+      ↓
+BAAI/bge-reranker-v2-m3
+      ↓
+final Top-K (default 5)
+```
+
+The reranker receives the **original user question** together with each candidate passage. Candidate text is built mainly from document title, heading/section information, and chunk content. It returns a relevance score for every candidate, and the candidates are sorted by that score before final Top-K selection.
+
+This is intentionally different from embedding retrieval: BGE-M3 can search the full indexed corpus efficiently because document representations are precomputed, while the cross-encoder jointly evaluates the query and each candidate and is therefore only applied to the much smaller candidate pool.
+
+For evaluation/debugging, the v2 path can preserve:
+
+- original BGE-M3 rank before dedicated reranking;
+- filtered candidate rank;
+- reranker score;
+- final reranker rank;
+- retrieval time and reranking time.
+
+The dedicated reranker can only reorder candidates that BGE-M3 already retrieved. If the ground-truth chunk is absent from the candidate pool, reranking cannot recover it; candidate Recall@K should therefore be evaluated separately from final reranked ranking quality.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 ---
 
@@ -545,14 +597,37 @@ Core pipeline CLI:
 
 ### `rag_loop.py`
 
+<<<<<<< HEAD
 Batch evaluation runner:
 
 - reads JSONL questions;
 - uses entity-aware retrieval;
+=======
+Batch evaluation baseline:
+
+- reads JSONL questions;
+- uses entity-aware retrieval;
+- applies Exact Product Filter when possible;
+- does not use the dedicated cross-encoder reranker;
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 - writes one JSONL output record per question immediately;
 - supports `--resume`;
 - can optionally save full retrieval results.
 
+<<<<<<< HEAD
+=======
+### `rag_loop_v2.py`
+
+Batch evaluation with dedicated reranking:
+
+- keeps the same query-analysis and Exact Product Filter stages;
+- retrieves a broader BGE-M3 candidate pool (default 30);
+- reranks the filtered candidates with `BAAI/bge-reranker-v2-m3`;
+- keeps the final Top-K (default 5);
+- can save candidate results before reranking and final reranked results for failure analysis;
+- supports disabling the reranker for A/B comparison.
+
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 ### `rag_ans.py`
 
 Stateless terminal QA:
@@ -661,8 +736,14 @@ These are implementation limitations of the current repository, not planned feat
 3. **No explicit Chinese/English synonym expansion.** The query analyzer extracts terms already present in the question but is instructed not to invent or normalize names.
 4. **No dedicated formula canonicalization layer.** Mathematical Unicode and PDF/VLM transcription are indexed as generated in the Markdown.
 5. **No iterative evidence-sufficiency loop.** The terminal explicitly performs one retrieval pass per question.
+<<<<<<< HEAD
 6. **The basic `rag.py ask` path is not entity-aware.** Query analysis and Exact Product Filter are implemented in `rag_loop.py` and `rag_ans.py`.
 7. **PDF image attachment is limited to the final ranked results and `max_answer_images`.** A relevant page outside final Top-K cannot be inspected by the answer VLM.
+=======
+6. **The basic `rag.py ask` path is not entity-aware and does not use the dedicated reranker.** Query analysis and Exact Product Filter are implemented in `rag_loop.py`, `rag_loop_v2.py`, and `rag_ans.py`; dedicated cross-encoder reranking is currently used by `rag_loop_v2.py`.
+7. **The dedicated reranker cannot recover missing candidates.** If the correct page/chunk is not present in the BGE-M3 candidate pool, `bge-reranker-v2-m3` cannot introduce it.
+8. **PDF image attachment is limited to the final ranked results and `max_answer_images`.** A relevant page outside final Top-K cannot be inspected by the answer VLM.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 These limitations are especially important when evaluating retrieval failures separately from answer-model failures.
 
@@ -670,7 +751,11 @@ These limitations are especially important when evaluating retrieval failures se
 
 ## 15. Recommended evaluation methodology
 
+<<<<<<< HEAD
 Final answer accuracy alone cannot tell whether an error came from retrieval or generation. For technical-document RAG, evaluate the stages separately.
+=======
+Final answer accuracy alone cannot tell whether an error came from retrieval, ranking, or generation. For technical-document RAG, evaluate the stages separately. With `rag_loop_v2.py`, compare both BGE-M3 candidate recall and the post-reranker ranking.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 Recommended metrics:
 
@@ -678,7 +763,12 @@ Recommended metrics:
 Document Recall@K
 Page Recall@K
 Chunk Recall@K
+<<<<<<< HEAD
 MRR
+=======
+Candidate Recall@30
+MRR before/after reranking
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 Final QA Accuracy
 ```
 
@@ -713,9 +803,17 @@ The following are sensible extensions but are **not implemented in the current c
 - Chinese/English technical synonym expansion;
 - product/document metadata filtering before vector search;
 - neighboring chunk/page expansion after retrieval;
+<<<<<<< HEAD
 - a dedicated answerability/cross-encoder reranker;
+=======
+- an evidence-sufficiency / answerability evaluator after reranking;
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 - separate table/formula/figure chunk types;
 - retrieval diagnostics that automatically compute Page Recall@K;
 - evidence-sufficiency checking followed by a controlled second retrieval pass.
 
+<<<<<<< HEAD
 The existing design intentionally keeps source preprocessing, chunking, retrieval, and answer generation modular so these components can be introduced independently.
+=======
+The existing design intentionally keeps source preprocessing, chunking, retrieval, and answer generation modular so these components can be introduced independently.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)

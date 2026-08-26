@@ -1,6 +1,10 @@
 # rag_everlight
 
+<<<<<<< HEAD
 A local multi-source RAG system for Everlight technical documents. The repository ingests crawler-produced HTML/TXT and PDF data, converts the sources into structured Markdown, builds a BGE-M3 hybrid dense+sparse index, retrieves Top-K evidence, and uses Qwen3.5-4B as the final multimodal answer model.
+=======
+A local multi-source RAG system for Everlight technical documents. The repository ingests crawler-produced HTML/TXT and PDF data, converts the sources into structured Markdown, builds a BGE-M3 hybrid dense+sparse index, retrieves candidate evidence, and uses Qwen3.5-4B as the final multimodal answer model. The `rag_loop_v2.py` evaluation path additionally applies a dedicated `BAAI/bge-reranker-v2-m3` second-stage reranker before the final Top-K is sent to Qwen.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 For PDF evidence, the exact retrieved source page image can also be sent to Qwen so tables, figures, formulas, values, and layout can be checked against the original page.
 
@@ -38,7 +42,11 @@ PDF -> page images -> Qwen3.5-4B -> page Markdown
                             answer + [S#]
 ```
 
+<<<<<<< HEAD
 The repository also contains an entity-aware query path (`rag_loop.py` and `rag_ans.py`) that uses Qwen to extract search keywords and exact product/model names before retrieval.
+=======
+The repository also contains an entity-aware query path (`rag_loop.py` and `rag_ans.py`) that uses Qwen to extract search keywords and exact product/model names before retrieval. `rag_loop_v2.py` extends the batch path with a dedicated cross-encoder reranker after BGE-M3 candidate retrieval and Exact Product Filter.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 ---
 
@@ -47,7 +55,12 @@ The repository also contains an entity-aware query path (`rag_loop.py` and `rag_
 ```text
 rag_everlight/
 ├── rag.py                         # main build/search/ask CLI
+<<<<<<< HEAD
 ├── rag_loop.py                    # batch entity-aware evaluation
+=======
+├── rag_loop.py                    # batch entity-aware evaluation baseline
+├── rag_loop_v2.py                 # batch evaluation + dedicated reranker
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 ├── rag_ans.py                     # interactive entity-aware terminal
 ├── rag_app/
 │   ├── config.py                  # paths and runtime defaults
@@ -59,7 +72,12 @@ rag_everlight/
 │   ├── chunking/
 │   │   └── markdown_chunker.py    # heading-aware chunking
 │   ├── retrieval/
+<<<<<<< HEAD
 │   │   └── bge_m3_index.py        # dense+sparse BGE-M3 retrieval
+=======
+│   │   ├── bge_m3_index.py        # dense+sparse BGE-M3 retrieval
+│   │   └── reranker.py            # BAAI/bge-reranker-v2-m3 second-stage reranking
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 │   ├── qa/
 │   │   └── engine.py              # Top-K evidence -> Qwen answer
 │   └── models/
@@ -115,10 +133,18 @@ The current code uses:
 | HTML/TXT cleanup | local Gemma 4 E4B GGUF through `ChatLlamaCpp` |
 | PDF page understanding | `Qwen/Qwen3.5-4B` |
 | Retrieval | `BAAI/bge-m3` |
+<<<<<<< HEAD
 | Final answer | `Qwen/Qwen3.5-4B` |
 | Entity/keyword extraction in `rag_loop.py` / `rag_ans.py` | same loaded Qwen3.5-4B |
 
 The Gemma GGUF is local and must be downloaded/provided separately. Qwen and BGE-M3 use normal Hugging Face cache behavior and are downloaded by Hugging Face when first loaded if they are not already cached.
+=======
+| Dedicated reranking in `rag_loop_v2.py` | `BAAI/bge-reranker-v2-m3` |
+| Final answer | `Qwen/Qwen3.5-4B` |
+| Entity/keyword extraction in `rag_loop.py` / `rag_loop_v2.py` / `rag_ans.py` | same loaded Qwen3.5-4B |
+
+The Gemma GGUF is local and must be downloaded/provided separately. Qwen, BGE-M3, and the dedicated reranker use normal Hugging Face cache behavior and are downloaded by Hugging Face when first loaded if they are not already cached. The reranker path also requires `FlagEmbedding`.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 ---
 
@@ -428,7 +454,11 @@ The terminal also reports generated-token probability for the final answer. This
 
 ## 13. Batch evaluation
 
+<<<<<<< HEAD
 `rag_loop.py` reads one JSON object per line. Every line must contain at least:
+=======
+Both `rag_loop.py` and `rag_loop_v2.py` read one JSON object per line. Every line must contain at least:
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 ```json
 {"question": "EL3120 的最大驅動電流是多少？"}
@@ -436,7 +466,11 @@ The terminal also reports generated-token probability for the final answer. This
 
 If an `answer` field is present, it is copied into the output as `ground_truth`.
 
+<<<<<<< HEAD
 Run:
+=======
+### Baseline entity-aware batch path
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 ```bash
 python rag_loop.py \
@@ -444,6 +478,7 @@ python rag_loop.py \
   --output rag_model_outputs.jsonl
 ```
 
+<<<<<<< HEAD
 Useful options:
 
 ```bash
@@ -486,6 +521,66 @@ There are currently two retrieval entry points.
 | `python rag.py ask ...` | No | No | 5 | simple QA / retrieval debugging |
 | `python rag_ans.py` | Yes, Qwen | Yes | 5 | interactive product QA |
 | `python rag_loop.py ...` | Yes, Qwen | Yes | config/default 5 | batch evaluation |
+=======
+### Reranker batch path
+
+`rag_loop_v2.py` keeps the same query-analysis and Exact Product Filter flow, but retrieves a broader BGE-M3 candidate pool and then uses `BAAI/bge-reranker-v2-m3` to reorder the candidates before selecting the final Top-K.
+
+Install the reranker dependency once:
+
+```bash
+pip install -U FlagEmbedding
+```
+
+Run:
+
+```bash
+python rag_loop_v2.py \
+  --input questions.jsonl \
+  --output rag_model_outputs_v2.jsonl \
+  --candidate-top-k 30 \
+  --top-k 5 \
+  --save-results
+```
+
+Useful options for `rag_loop_v2.py`:
+
+```bash
+# Only test the first 10 questions
+python rag_loop_v2.py \
+  --input questions.jsonl \
+  --output rag_model_outputs_v2.jsonl \
+  --limit 10
+
+# Resume an interrupted run
+python rag_loop_v2.py \
+  --input questions.jsonl \
+  --output rag_model_outputs_v2.jsonl \
+  --resume
+
+# Disable the dedicated reranker for an A/B baseline run
+python rag_loop_v2.py \
+  --input questions.jsonl \
+  --output rag_model_outputs_v2_no_rerank.jsonl \
+  --disable-reranker \
+  --save-results
+```
+
+The v2 output can preserve both the BGE-M3 candidate rank and the final reranker score/rank, which is useful for determining whether an error is caused by retrieval recall or by ranking. Both batch runners write each completed result immediately so an interruption does not discard earlier outputs.
+
+---
+
+## 14. Plain RAG vs entity-aware / reranked RAG
+
+There are currently multiple retrieval entry points.
+
+| Command | Query analysis | Exact Product Filter | Dedicated reranker | Default final Top-K | Use case |
+|---|---|---|---|---:|---|
+| `python rag.py ask ...` | No | No | No | 5 | simple QA / retrieval debugging |
+| `python rag_ans.py` | Yes, Qwen | Yes | No | 5 | interactive product QA |
+| `python rag_loop.py ...` | Yes, Qwen | Yes | No | config/default 5 | batch baseline |
+| `python rag_loop_v2.py ...` | Yes, Qwen | Yes | `bge-reranker-v2-m3` | 5 | batch evaluation with second-stage reranking |
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 The entity-aware path first retrieves at least 30 results before exact-name filtering:
 
@@ -493,7 +588,11 @@ The entity-aware path first retrieves at least 30 results before exact-name filt
 candidate_top_k = max(final_top_k, 30)
 ```
 
+<<<<<<< HEAD
 If no retrieved candidate contains the extracted exact product name, the code falls back to the unfiltered retrieval list instead of returning an empty result set.
+=======
+If no retrieved candidate contains the extracted exact product name, the code falls back to the unfiltered retrieval list instead of returning an empty result set. In `rag_loop_v2.py`, the surviving candidate pool is then scored by the dedicated reranker and only the highest-ranked results are sent to the final answer model.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 ---
 
@@ -513,7 +612,11 @@ Dense RRF weight  = 0.55
 Sparse RRF weight = 0.45
 ```
 
+<<<<<<< HEAD
 By default, BGE-M3 pair scoring is then attempted on the candidate set before final Top-K selection.
+=======
+By default, the core BGE-M3 index can attempt its own BGE-M3 pair scoring before final Top-K selection. This is separate from the dedicated cross-encoder reranker used by `rag_loop_v2.py`.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 This is why technical tokens such as the following can contribute through the sparse branch while paraphrased questions can still match through dense retrieval:
 
@@ -527,7 +630,11 @@ Rg
 VEE
 ```
 
+<<<<<<< HEAD
 See [`DESIGN.md`](DESIGN.md) for the complete scoring flow.
+=======
+In `rag_loop_v2.py`, the online ranking flow is therefore: BGE-M3 broad retrieval -> Exact Product Filter -> `bge-reranker-v2-m3` -> final Top-K. See [`DESIGN.md`](DESIGN.md) for the complete scoring flow.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 ---
 
@@ -640,6 +747,7 @@ python rag.py search "<same question>" --top-k 10
 
 Check whether the correct document/page appears in the retrieval results. If the ground-truth page is outside Top-K, the final Qwen model never receives that page's evidence.
 
+<<<<<<< HEAD
 For batch diagnosis, use:
 
 ```bash
@@ -650,6 +758,20 @@ python rag_loop.py \
 ```
 
 This makes it possible to separate retrieval failures from final-answer failures.
+=======
+For batch diagnosis with the dedicated reranker, use:
+
+```bash
+python rag_loop_v2.py \
+  --input questions.jsonl \
+  --output rag_model_outputs_v2.jsonl \
+  --candidate-top-k 30 \
+  --top-k 5 \
+  --save-results
+```
+
+This makes it possible to compare the BGE-M3 candidate ranking with the final reranked ranking and separate retrieval failures from ranking or final-answer failures.
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 
 ---
 
@@ -693,6 +815,12 @@ python rag.py ask "EL3120 的最大驅動電流是多少？"
 
 # Optional entity-aware interactive mode
 python rag_ans.py --top-k 5
+<<<<<<< HEAD
+=======
+
+# Optional batch evaluation with dedicated reranker
+python rag_loop_v2.py --input questions.jsonl --output rag_model_outputs_v2.jsonl --candidate-top-k 30 --top-k 5 --save-results
+>>>>>>> f07dea0 (Add reranker and update RAG docs)
 ```
 
 Or, after validation:

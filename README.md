@@ -1,5 +1,7 @@
 # rag_everlight
 
+註解: rag_loop_v2.py 是核心程式，會將一個 jsonl 檔案整個回答完，rag_model_outputs_v2_400.jsonl 是新增至 400 題，要負責將 rag_ans.py 單一流程文達改成和 rag_loop_v2.py 同樣流程才行，現在還沒改。
+
 A local multi-source Retrieval-Augmented Generation (RAG) system for Everlight technical documents.
 
 The repository ingests crawler-produced HTML/TXT and PDF data, converts both sources into structured Markdown, creates heading-aware chunks, builds a BGE-M3 hybrid dense+sparse index, retrieves evidence, and uses Qwen3.5-4B as the final multimodal answer model.

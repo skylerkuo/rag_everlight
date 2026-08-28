@@ -25,9 +25,13 @@ Pipeline
 3. BGE-M3 retrieves candidate_top_k chunks.
 4. Exact Product Filter is applied when possible.
 5. Optional BGE reranker reranks candidates.
-6. Keep final Top-K and log them.
-7. Qwen generates the final answer.
-8. Capture ONE confidence value:
+6. Qwen reviews the retrieved Top-K and returns:
+       - irrelevant_sources: evidence that is clearly not useful
+       - revised_keywords: improved keywords for another search
+7. Search repeats only when BOTH are present and keywords materially changed.
+   At most 3 retrieval rounds are allowed (configurable up to 3).
+8. If no useful adjustment is proposed, answer immediately from the current Top-K.
+9. Capture ONE confidence value for the FINAL answer only:
        generated_token_probability
    = exp(mean(log p(generated token)))
 
@@ -74,6 +78,36 @@ Rules:
 """
 
 
+RETRIEVAL_REVIEW_SYSTEM = """You are a retrieval evidence reviewer for an iterative RAG search.
+
+You will receive:
+- the ORIGINAL user question,
+- the CURRENT search keywords,
+- retrieved evidence items labelled [S1], [S2], ...
+
+Your task is ONLY to decide whether another retrieval pass is worthwhile.
+
+Return JSON only in exactly this structure:
+{
+  "irrelevant_sources": [],
+  "revised_keywords": []
+}
+
+Rules:
+- irrelevant_sources: list only source IDs such as "S2" or "S5" that are CLEARLY not useful for answering the original question.
+- Do NOT mark a source irrelevant merely because it is incomplete; partial evidence can still be useful.
+- revised_keywords: search terms for the NEXT retrieval pass.
+- Preserve every explicit hard requirement from the original question.
+- You may use synonyms, translations, abbreviations, or exact terminology seen in useful evidence.
+- Do NOT invent product names, model numbers, specifications, or facts that are not supported by the question or retrieved evidence.
+- Do NOT answer the user's question.
+- Do NOT explain your reasoning.
+- If the evidence is already adequate, return both arrays empty.
+- If you cannot confidently identify at least one irrelevant source, return irrelevant_sources as an empty array.
+- If no meaningful keyword adjustment is needed, return revised_keywords as an empty array.
+"""
+
+
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(
         description=(
@@ -102,6 +136,17 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=50,
         help="BGE-M3 candidate count before exact filtering/reranking. Default: 30.",
+    )
+    p.add_argument(
+        "--max-search-rounds",
+        type=int,
+        default=3,
+        help=(
+            "Maximum iterative retrieval rounds. Must be 1-3. "
+            "A new round runs only when the retrieval reviewer identifies "
+            "irrelevant evidence AND proposes materially changed keywords. "
+            "Default: 3."
+        ),
     )
     p.add_argument(
         "--reranker-model",
@@ -319,6 +364,114 @@ def build_search_query(
         )
 
     return "\n".join(parts)
+
+
+
+def _clean_string_list(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+
+    output: list[str] = []
+    seen: set[str] = set()
+
+    for item in value:
+        item = str(item).strip()
+        if not item:
+            continue
+
+        key = item.casefold()
+        if key in seen:
+            continue
+
+        seen.add(key)
+        output.append(item)
+
+    return output
+
+
+def _keywords_materially_changed(
+    old_keywords: list[str],
+    new_keywords: list[str],
+) -> bool:
+    """Ignore order/case-only changes; require a real keyword-set change."""
+
+    old_set = {
+        x.strip().casefold()
+        for x in old_keywords
+        if str(x).strip()
+    }
+    new_set = {
+        x.strip().casefold()
+        for x in new_keywords
+        if str(x).strip()
+    }
+    return old_set != new_set
+
+
+def review_retrieval_results(
+    engine: RAGEngine,
+    question: str,
+    current_keywords: list[str],
+    results: list[Any],
+) -> dict[str, list[str]]:
+    """
+    Ask the local Qwen model whether another retrieval pass is worthwhile.
+
+    IMPORTANT:
+    - This is a retrieval-control call, not the final answer call.
+    - It sees only the question, current keywords, and current retrieved evidence.
+    - It never sees ground truth / evaluation metadata.
+    """
+
+    prompt = f"""ORIGINAL USER QUESTION:
+{question}
+
+CURRENT SEARCH KEYWORDS:
+{json.dumps(current_keywords, ensure_ascii=False)}
+
+CURRENT RETRIEVED EVIDENCE:
+{_context(results)}
+
+Return the required JSON only.
+"""
+
+    raw = engine.answer_model.generate(
+        prompt=prompt,
+        image_paths=None,
+        system=RETRIEVAL_REVIEW_SYSTEM,
+        max_new_tokens=240,
+    )
+
+    parsed = _extract_json_object(raw)
+
+    irrelevant_sources = _clean_string_list(
+        parsed.get("irrelevant_sources", [])
+    )
+    revised_keywords = _clean_string_list(
+        parsed.get("revised_keywords", [])
+    )
+
+    # Keep only valid current source labels (S1..Sn).
+    valid_sources = {
+        f"S{i}"
+        for i in range(1, len(results) + 1)
+    }
+    cleaned_sources: list[str] = []
+    seen_sources: set[str] = set()
+
+    for source in irrelevant_sources:
+        normalized = source.strip().upper()
+        if normalized not in valid_sources:
+            continue
+        if normalized in seen_sources:
+            continue
+        seen_sources.add(normalized)
+        cleaned_sources.append(normalized)
+
+    return {
+        "irrelevant_sources": cleaned_sources,
+        "revised_keywords": revised_keywords,
+    }
 
 
 def _result_search_text(result: Any) -> str:
@@ -740,12 +893,22 @@ def entity_aware_ask(
     *,
     top_k: int,
     candidate_top_k: int,
+    max_search_rounds: int,
     reranker: BGEReranker | None,
     max_content_chars: int,
     save_candidates: bool,
 ) -> dict[str, Any]:
     """
-    Direct RAG flow. Only question-derived information is used.
+    Iterative RAG flow. Only question-derived information and retrieved evidence
+    are used during inference.
+
+    Retry rule:
+    - After each retrieval/rerank pass, Qwen reviews the current Top-K.
+    - Another search is allowed ONLY when BOTH conditions are true:
+        1) at least one current source is marked clearly irrelevant, and
+        2) revised keywords are proposed and materially differ from the current set.
+    - Otherwise the system answers immediately from the current Top-K.
+    - Total retrieval rounds are capped at max_search_rounds (hard max: 3).
     """
 
     # Query analysis is NOT included in final-answer confidence.
@@ -754,118 +917,265 @@ def entity_aware_ask(
         question,
     )
 
-    keywords = search_info.get(
-        "keywords",
-        [],
+    initial_keywords = list(
+        search_info.get("keywords", [])
     )
-    proper_nouns = search_info.get(
-        "proper_nouns",
-        [],
-    )
-
-    retrieval_query = build_search_query(
-        question,
-        search_info,
+    current_keywords = list(initial_keywords)
+    proper_nouns = list(
+        search_info.get("proper_nouns", [])
     )
 
     candidate_top_k = max(
         top_k,
         candidate_top_k,
     )
-
-    retrieval_started = time.perf_counter()
-
-    candidates = engine.index.search(
-        retrieval_query,
-        top_k=candidate_top_k,
+    max_search_rounds = max(
+        1,
+        min(int(max_search_rounds), 3),
     )
 
-    retrieval_seconds = (
-        time.perf_counter()
-        - retrieval_started
-    )
+    total_retrieval_seconds = 0.0
+    total_rerank_seconds = 0.0
+    total_review_seconds = 0.0
+    search_rounds: list[dict[str, Any]] = []
 
-    original_ranks = {
-        id(result): rank
-        for rank, result
-        in enumerate(candidates, start=1)
-    }
+    final_round_data: dict[str, Any] | None = None
+    stop_reason = "max_search_rounds_reached"
 
-    filtered_candidates, filter_applied = (
-        apply_exact_product_filter(
-            candidates,
-            proper_nouns,
-        )
-    )
-
-    rerank_seconds = 0.0
-
-    if reranker is not None:
-        rerank_started = time.perf_counter()
-
-        ranked_items = reranker.rerank(
+    for round_no in range(1, max_search_rounds + 1):
+        round_search_info = {
+            "keywords": current_keywords,
+            "proper_nouns": proper_nouns,
+        }
+        retrieval_query = build_search_query(
             question,
-            filtered_candidates,
-            top_k=top_k,
-            original_ranks=original_ranks,
+            round_search_info,
         )
 
-        rerank_seconds = (
+        retrieval_started = time.perf_counter()
+        candidates = engine.index.search(
+            retrieval_query,
+            top_k=candidate_top_k,
+        )
+        retrieval_seconds = (
             time.perf_counter()
-            - rerank_started
+            - retrieval_started
         )
+        total_retrieval_seconds += retrieval_seconds
 
-        results = [
-            item["result"]
-            for item in ranked_items
-        ]
+        original_ranks = {
+            id(result): rank
+            for rank, result
+            in enumerate(candidates, start=1)
+        }
 
-        raw_final_results = (
-            serialize_reranked_results(
-                ranked_items
+        filtered_candidates, filter_applied = (
+            apply_exact_product_filter(
+                candidates,
+                proper_nouns,
             )
         )
-    else:
-        results = filtered_candidates[:top_k]
 
-        raw_final_results = []
-        for final_rank, result in enumerate(
-            results,
-            start=1,
-        ):
-            try:
-                data = result.to_dict()
-            except Exception:
-                data = {
-                    "repr": repr(result),
-                }
+        rerank_seconds = 0.0
 
-            if not isinstance(data, dict):
-                data = {
-                    "result": data,
-                }
+        if reranker is not None:
+            rerank_started = time.perf_counter()
 
-            data = dict(data)
-            data["bge_rank_before_rerank"] = (
-                original_ranks.get(
-                    id(result)
+            ranked_items = reranker.rerank(
+                question,
+                filtered_candidates,
+                top_k=top_k,
+                original_ranks=original_ranks,
+            )
+
+            rerank_seconds = (
+                time.perf_counter()
+                - rerank_started
+            )
+            total_rerank_seconds += rerank_seconds
+
+            results = [
+                item["result"]
+                for item in ranked_items
+            ]
+
+            raw_final_results = (
+                serialize_reranked_results(
+                    ranked_items
                 )
             )
-            data["rerank_score"] = None
-            data["rerank_rank"] = final_rank
-            raw_final_results.append(data)
+        else:
+            results = filtered_candidates[:top_k]
 
-    final_top_k = [
-        normalize_final_item(
-            item,
-            rank,
-            max_content_chars,
+            raw_final_results = []
+            for final_rank, result in enumerate(
+                results,
+                start=1,
+            ):
+                try:
+                    data = result.to_dict()
+                except Exception:
+                    data = {
+                        "repr": repr(result),
+                    }
+
+                if not isinstance(data, dict):
+                    data = {
+                        "result": data,
+                    }
+
+                data = dict(data)
+                data["bge_rank_before_rerank"] = (
+                    original_ranks.get(
+                        id(result)
+                    )
+                )
+                data["rerank_score"] = None
+                data["rerank_rank"] = final_rank
+                raw_final_results.append(data)
+
+        final_top_k = [
+            normalize_final_item(
+                item,
+                rank,
+                max_content_chars,
+            )
+            for rank, item in enumerate(
+                raw_final_results,
+                start=1,
+            )
+        ]
+
+        review_started = time.perf_counter()
+        review = review_retrieval_results(
+            engine=engine,
+            question=question,
+            current_keywords=current_keywords,
+            results=results,
         )
-        for rank, item in enumerate(
-            raw_final_results,
-            start=1,
+        review_seconds = (
+            time.perf_counter()
+            - review_started
         )
-    ]
+        total_review_seconds += review_seconds
+
+        irrelevant_sources = review.get(
+            "irrelevant_sources",
+            [],
+        )
+        revised_keywords = review.get(
+            "revised_keywords",
+            [],
+        )
+        keywords_changed = (
+            _keywords_materially_changed(
+                current_keywords,
+                revised_keywords,
+            )
+            if revised_keywords
+            else False
+        )
+
+        round_record: dict[str, Any] = {
+            "round": round_no,
+            "keywords": list(current_keywords),
+            "retrieval_query": retrieval_query,
+            "candidate_count": len(candidates),
+            "filtered_candidate_count": len(
+                filtered_candidates
+            ),
+            "exact_product_filter_applied": (
+                filter_applied
+            ),
+            "final_top_k_count": len(final_top_k),
+            "final_top_k_refs": [
+                {
+                    "rank": item.get("rank"),
+                    "chunk_id": item.get("chunk_id"),
+                    "document_id": item.get("document_id"),
+                    "title": item.get("title"),
+                    "page_number": item.get("page_number"),
+                    "source_url": item.get("source_url"),
+                }
+                for item in final_top_k
+            ],
+            "irrelevant_sources": (
+                irrelevant_sources
+            ),
+            "revised_keywords": revised_keywords,
+            "keywords_changed": keywords_changed,
+            "retrieval_seconds": round(
+                retrieval_seconds,
+                3,
+            ),
+            "rerank_seconds": round(
+                rerank_seconds,
+                3,
+            ),
+            "review_seconds": round(
+                review_seconds,
+                3,
+            ),
+        }
+        search_rounds.append(round_record)
+
+        final_round_data = {
+            "keywords": list(current_keywords),
+            "retrieval_query": retrieval_query,
+            "candidates": candidates,
+            "original_ranks": original_ranks,
+            "filter_applied": filter_applied,
+            "results": results,
+            "raw_final_results": raw_final_results,
+            "final_top_k": final_top_k,
+            "irrelevant_sources": irrelevant_sources,
+            "revised_keywords": revised_keywords,
+            "retrieval_seconds": retrieval_seconds,
+            "rerank_seconds": rerank_seconds,
+            "review_seconds": review_seconds,
+        }
+
+        # User-requested stop behavior:
+        # If no useless evidence is identified OR no keyword adjustment is
+        # proposed, answer immediately from the current results.
+        if not irrelevant_sources:
+            stop_reason = "no_irrelevant_sources"
+            break
+
+        if not revised_keywords:
+            stop_reason = "no_keyword_adjustment"
+            break
+
+        if not keywords_changed:
+            stop_reason = "keyword_adjustment_unchanged"
+            break
+
+        if round_no >= max_search_rounds:
+            stop_reason = "max_search_rounds_reached"
+            break
+
+        # Run another retrieval pass. The ORIGINAL question is always preserved
+        # by build_search_query(); only the keyword supplement changes.
+        current_keywords = revised_keywords
+
+    if final_round_data is None:
+        raise RuntimeError(
+            "Iterative retrieval produced no retrieval round."
+        )
+
+    results = final_round_data["results"]
+    final_top_k = final_round_data["final_top_k"]
+    final_keywords = final_round_data["keywords"]
+    final_retrieval_query = (
+        final_round_data["retrieval_query"]
+    )
+    final_candidates = final_round_data["candidates"]
+    final_original_ranks = (
+        final_round_data["original_ranks"]
+    )
+    final_filter_applied = (
+        final_round_data["filter_applied"]
+    )
 
     images = _images(
         results,
@@ -905,12 +1215,23 @@ Instructions:
     )
 
     output: dict[str, Any] = {
-        "keywords": keywords,
+        "initial_keywords": initial_keywords,
+        "keywords": final_keywords,
         "proper_nouns": proper_nouns,
-        "exact_product_filter_applied": (
-            filter_applied
+        "search_round_count": len(search_rounds),
+        "max_search_rounds": max_search_rounds,
+        "search_stop_reason": stop_reason,
+        "search_rounds": search_rounds,
+        "last_review_irrelevant_sources": (
+            final_round_data["irrelevant_sources"]
         ),
-        "retrieval_query": retrieval_query,
+        "last_review_revised_keywords": (
+            final_round_data["revised_keywords"]
+        ),
+        "exact_product_filter_applied": (
+            final_filter_applied
+        ),
+        "retrieval_query": final_retrieval_query,
         "candidate_top_k": candidate_top_k,
         "final_top_k_count": len(final_top_k),
         "reranker_enabled": (
@@ -922,11 +1243,15 @@ Instructions:
             else None
         ),
         "retrieval_seconds": round(
-            retrieval_seconds,
+            total_retrieval_seconds,
             3,
         ),
         "rerank_seconds": round(
-            rerank_seconds,
+            total_rerank_seconds,
+            3,
+        ),
+        "retrieval_review_seconds": round(
+            total_review_seconds,
             3,
         ),
         "generation_seconds": round(
@@ -948,8 +1273,8 @@ Instructions:
     if save_candidates:
         output["retrieval_candidates_before_rerank"] = (
             serialize_candidates(
-                candidates,
-                original_ranks,
+                final_candidates,
+                final_original_ranks,
                 max_content_chars,
             )
         )
@@ -986,6 +1311,11 @@ def main() -> int:
     if args.candidate_top_k < 1:
         raise SystemExit(
             "--candidate-top-k must be >= 1"
+        )
+
+    if not 1 <= args.max_search_rounds <= 3:
+        raise SystemExit(
+            "--max-search-rounds must be between 1 and 3"
         )
 
     input_path = (
@@ -1047,6 +1377,10 @@ def main() -> int:
     print(
         f"Final Top-K: "
         f"{args.top_k}"
+    )
+    print(
+        f"Max search rounds: "
+        f"{args.max_search_rounds}"
     )
     print("=" * 80)
 
@@ -1155,6 +1489,9 @@ def main() -> int:
                 top_k=args.top_k,
                 candidate_top_k=(
                     args.candidate_top_k
+                ),
+                max_search_rounds=(
+                    args.max_search_rounds
                 ),
                 reranker=reranker,
                 max_content_chars=(

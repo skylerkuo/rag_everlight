@@ -96,7 +96,7 @@ class Settings:
     bge_batch_size: int = 12
     bge_max_length: int = 1024
     candidate_k: int = 24
-    top_k: int = 5
+    top_k: int = 7
     use_bge_pair_rerank: bool = True
 
     # Markdown-aware chunking.
@@ -109,7 +109,7 @@ class Settings:
     pdf_render_dpi: int = 150
     # 1 = previous + target + next. Only the target page is written to MD.
     pdf_context_radius: int = 1
-    max_answer_images: int = 4
+    max_answer_images: int = 7
 
     @classmethod
     def fixed(cls) -> "Settings":

@@ -165,7 +165,7 @@ class BGEM3Index:
 
         dense_rank = np.argsort(-dense_scores)[:candidate_k].tolist()
         sparse_rank = np.argsort(-sparse_scores)[:candidate_k].tolist()
-        fused = _rrf([dense_rank, sparse_rank], weights=[0.55, 0.45])
+        fused = _rrf([dense_rank, sparse_rank], weights=[0.4, 0.6])
         candidates = sorted(fused, key=fused.get, reverse=True)[:candidate_k]
 
         pair_scores: dict[int, float] = {}
